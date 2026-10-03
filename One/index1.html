@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSC Higher Mathematics — Chapter 7 MCQ Preparation Test</title>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    <style>
+        :root {
+            --ink: #18212b;
+            --muted: #5f6b76;
+            --line: #cbd3da;
+            --soft: #f4f7f9;
+            --accent: #0b5cab;
+            --good: #147a43;
+            --bad: #b42318;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            background: #eef2f5;
+            color: var(--ink);
+            font-family: "Noto Sans Bengali", "Nirmala UI", "Segoe UI", Arial, sans-serif;
+            line-height: 1.35
+        }
+
+        button,
+        input {
+            font: inherit
+        }
+
+        .app {
+            max-width: 1180px;
+            margin: 18px auto;
+            padding: 0 14px
+        }
+
+        .topbar,
+        .exam-head,
+        .controls,
+        .result-panel {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .05)
+        }
+
+        .topbar {
+            padding: 14px 16px;
+            margin-bottom: 12px
+        }
+
+        .title {
+            font-size: 22px;
+            font-weight: 800;
+            text-align: center
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--muted);
+            margin-top: 4px
+        }
+
+        .instructor {
+            text-align: center;
+            font-weight: 700;
+            margin-top: 7px
+        }
+
+        .exam-head {
+            padding: 12px 14px
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px
+        }
+
+        .meta-grid label {
+            font-size: 13px;
+            color: var(--muted);
+            display: block;
+            margin-bottom: 3px
+        }
+
+        .meta-grid input {
+            width: 100%;
+            padding: 7px 9px;
+            border: 1px solid #b9c2ca;
+            border-radius: 7px;
+            background: #fff
+        }
+
+        .exam-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 8px;
+            margin-top: 10px
+        }
+
+        .meta-box {
+            border: 1px solid var(--line);
+            border-radius: 7px;
+            padding: 7px 9px;
+            background: var(--soft);
+            font-size: 13px
+        }
+
+        .meta-box strong {
+            display: block;
+            font-size: 15px
+        }
+
+        .controls {
+            margin: 12px 0;
+            padding: 10px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            position: sticky;
+            top: 0;
+            z-index: 5
+        }
+
+        button {
+            border: 0;
+            border-radius: 8px;
+            padding: 9px 14px;
+            cursor: pointer;
+            font-weight: 700
+        }
+
+        .lang-btn {
+            background: #e7edf3;
+            color: #18212b
+        }
+
+        .lang-btn.active {
+            background: #0b5cab;
+            color: #fff
+        }
+
+        .start {
+            background: #16803c;
+            color: #fff
+        }
+
+        .submit {
+            background: #b42318;
+            color: #fff
+        }
+
+        .print {
+            background: #5b3aa4;
+            color: #fff
+        }
+
+        .secondary {
+            background: #dce5ec;
+            color: #18212b
+        }
+
+        button:disabled {
+            opacity: .5;
+            cursor: not-allowed
+        }
+
+        .timer {
+            font-weight: 800;
+            min-width: 150px;
+            text-align: center
+        }
+
+        .instructions {
+            font-size: 13px;
+            color: var(--muted);
+            text-align: center;
+            width: 100%
+        }
+
+        .questions-page {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 12px
+        }
+
+        .page-label {
+            font-weight: 800;
+            text-align: center;
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 5px;
+            margin-bottom: 8px
+        }
+
+        .questions-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 7px 12px;
+            align-items: start
+        }
+
+        .question {
+            border: 1px solid #d7dde2;
+            border-radius: 7px;
+            padding: 7px 8px;
+            break-inside: avoid;
+            page-break-inside: avoid;
+            background: #fff
+        }
+
+        .qtext {
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 5px
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px 10px
+        }
+
+        .option {
+            display: flex;
+            align-items: flex-start;
+            gap: 5px;
+            font-size: 13px;
+            padding: 3px;
+            border-radius: 5px
+        }
+
+        .option input {
+            margin-top: 4px
+        }
+
+        .option.correct {
+            background: #e7f6ed;
+            color: #126b3c;
+            font-weight: 700
+        }
+
+        .option.wrong {
+            background: #fdecea;
+            color: #a61b12
+        }
+
+        .status {
+            font-size: 12px;
+            font-weight: 800;
+            margin-top: 4px
+        }
+
+        .status.correct {
+            color: var(--good)
+        }
+
+        .status.wrong {
+            color: var(--bad)
+        }
+
+        .solution-wrap {
+            margin-top: 5px
+        }
+
+        .solution-btn {
+            padding: 5px 8px;
+            font-size: 11px;
+            background: #edf1f4
+        }
+
+        .solution {
+            display: none;
+            margin-top: 5px;
+            border-left: 3px solid #0b5cab;
+            background: #f7faff;
+            padding: 7px;
+            font-size: 12px
+        }
+
+        .solution.open {
+            display: block
+        }
+
+        .result-panel {
+            padding: 14px;
+            margin-bottom: 12px;
+            display: none
+        }
+
+        .score {
+            font-size: 28px;
+            font-weight: 900;
+            text-align: center
+        }
+
+        .result-note {
+            text-align: center;
+            color: var(--muted)
+        }
+
+        .print-note {
+            text-align: center;
+            color: var(--muted);
+            font-size: 12px;
+            margin-top: 6px
+        }
+
+        .hidden {
+            display: none !important
+        }
+
+        @media (max-width:800px) {
+
+            .meta-grid,
+            .exam-meta {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .questions-grid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        @media print {
+            body {
+                background: #fff
+            }
+
+            .app {
+                max-width: none;
+                margin: 0;
+                padding: 0
+            }
+
+            .topbar,
+            .controls,
+            .result-panel,
+            .print-note {
+                display: none !important
+            }
+
+            .exam-head {
+                border: 0;
+                box-shadow: none;
+                border-radius: 0;
+                padding: 0 0 5mm;
+                margin: 0
+            }
+
+            .meta-grid input {
+                border: 0;
+                border-bottom: 1px solid #555;
+                border-radius: 0;
+                padding: 1px 0
+            }
+
+            .exam-meta {
+                gap: 4px;
+                margin-top: 4px
+            }
+
+            .meta-box {
+                background: #fff;
+                padding: 3px 5px
+            }
+
+            .questions-page {
+                border: 0;
+                border-radius: 0;
+                padding: 0;
+                margin: 0;
+                page-break-after: always
+            }
+
+            .questions-page:last-of-type {
+                page-break-after: auto
+            }
+
+            .page-label {
+                font-size: 10pt;
+                margin-bottom: 3mm
+            }
+
+            .questions-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 4mm 6mm
+            }
+
+            .question {
+                border: 0;
+                border-bottom: 1px dotted #aaa;
+                border-radius: 0;
+                padding: 0 0 2mm;
+                margin: 0;
+            }
+
+            .qtext {
+                font-size: 8.5pt;
+                margin-bottom: 2px
+            }
+
+            .option {
+                font-size: 8pt;
+                padding: 1px 0;
+                gap: 3px
+            }
+
+            .solution-wrap,
+            .status {
+                display: none !important
+            }
+
+            .option input {
+                display: none
+            }
+
+            .questions-page:nth-of-type(2) {
+                page-break-before: always
+            }
+
+            @page {
+                size: A4 portrait;
+                margin: 7mm
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app">
+        <section class="topbar">
+            <div class="title">SSC Preparation Test — Higher Mathematics</div>
+            <div class="subtitle">Chapter 7: অসীম ধারা (Infinite Series) | MCQ Practice Test</div>
+            <div class="instructor">Instructor: MD. Rashid, Assistant Professor in Mathematics | Contact: 01711008786
+            </div>
+        </section>
+
+        <section class="exam-head">
+            <div class="meta-grid">
+                <div><label data-bn="Student Name" data-en="Student Name">Student Name</label><input id="studentName"
+                        type="text" placeholder="........................................"></div>
+                <div><label data-bn="School/College" data-en="School/College">School/College</label><input id="school"
+                        type="text" placeholder="........................................"></div>
+                <div><label data-bn="Date" data-en="Date">Date</label><input id="examDate" type="date"></div>
+            </div>
+            <div class="exam-meta">
+                <div class="meta-box"><span data-bn="Subject Code" data-en="Subject Code">Subject
+                        Code:</span><strong> 126 </strong></div>
+                <div class="meta-box"><span data-bn="Time" data-en="Time">Time</span><strong>40 Minutes</strong></div>
+                <div class="meta-box"><span data-bn="MCQ / Full Marks" data-en="MCQ / Full Marks">MCQ / Full
+                        Marks</span><strong>     / 40</strong></div>
+                <div class="meta-box"><span data-bn="Exam Start" data-en="Exam Start">Exam Start</span><strong
+                        id="startTime">--:--:--</strong></div>
+                <div class="meta-box"><span data-bn="Remaining" data-en="Remaining">Remaining</span><strong
+                        id="remaining">40:00</strong></div>
+                <div class="meta-box"><span data-bn="End Time" data-en="End Time">End Time</span><strong
+                        id="endTime">--:--:--</strong></div>
+                <div class="meta-box"><span data-bn="Attempted" data-en="Attempted">Attempted</span><strong
+                        id="attempted">0 / 40</strong></div>
+                <div class="meta-box"><span data-bn="Status" data-en="Status">Status</span><strong id="examStatus">Not
+                        Started</strong></div>
+            </div>
+        </section>
+
+        <section class="controls">
+            <button class="lang-btn active" id="bnBtn" onclick="setLanguage('bn')">Bangla Version</button>
+            <button class="lang-btn" id="enBtn" onclick="setLanguage('en')">English Version</button>
+            <button class="start" id="startBtn" onclick="startExam()">Exam Start</button>
+            <button class="submit" id="submitBtn" onclick="submitExam()" disabled>Submit</button>
+            <button class="print" onclick="window.print()">Print</button>
+            <span class="timer" id="timerText">40:00</span>
+            <div class="instructions" id="instructions">Select an exam language, fill in student information, then click
+                Exam Start. The test auto-submits when time ends.</div>
+        </section>
+
+        <section class="result-panel" id="resultPanel">
+            <div class="score" id="scoreText"></div>
+            <div class="result-note" id="resultNote"></div>
+        </section>
+
+        <div id="pages"></div>
+    </div>
+
+    <script>
+        const QUESTIONS = [{ "id": 1, "bn": "$\\frac13+\\frac2{3^2}+\\frac3{3^3}+\\frac4{3^4}+\\cdots$ অনুক্রমটির সাধারণ পদ কোনটি?", "en": "Which is the general term of $\\frac13+\\frac2{3^2}+\\frac3{3^3}+\\frac4{3^4}+\\cdots$?", "optsBn": ["$\\frac{n+1}{3^n}$", "$\\frac{n}{3^n}$", "$\\frac{n+1}{3^{n-1}}$", "$\\frac{n}{3^{n-1}}$"], "optsEn": ["$\\frac{n+1}{3^n}$", "$\\frac{n}{3^n}$", "$\\frac{n+1}{3^{n-1}}$", "$\\frac{n}{3^{n-1}}$"], "ans": 1, "solBn": "প্রতিটি পদে লব $n$ এবং হর $3^n$। তাই সাধারণ পদ $a_n=\\frac{n}{3^n}$।", "solEn": "Each term has numerator $n$ and denominator $3^n$. Hence $a_n=\\frac{n}{3^n}$." }, { "id": 2, "bn": "$\\{1,\\sqrt3,\\sqrt5,\\sqrt7,\\ldots\\}$ অনুক্রমের সাধারণ পদ—", "en": "The general term of $\\{1,\\sqrt3,\\sqrt5,\\sqrt7,\\ldots\\}$ is—", "optsBn": ["$\\sqrt{2n+1}$", "$\\sqrt{2n-1}$", "$\\sqrt{n+1}$", "$\\sqrt{n-1}$"], "optsEn": ["$\\sqrt{2n+1}$", "$\\sqrt{2n-1}$", "$\\sqrt{n+1}$", "$\\sqrt{n-1}$"], "ans": 1, "solBn": "প্রথম পদ $n=1$ এ $\\sqrt{2(1)-1}=1$ এবং পরের পদগুলোও মিলে যায়। তাই $a_n=\\sqrt{2n-1}$।", "solEn": "For $n=1$, $\\sqrt{2(1)-1}=1$, and the subsequent terms match. Hence $a_n=\\sqrt{2n-1}$." }, { "id": 3, "bn": "$\\frac13,\\frac23,\\frac9{11},\\frac89,\\ldots$ অনুক্রমটির সাধারণ পদ কোনটি?", "en": "Which is the general term of $\\frac13,\\frac23,\\frac9{11},\\frac89,\\ldots$?", "optsBn": ["$\\frac{n^2}{2n^2+1}$", "$\\frac{n^2}{n^2+2}$", "$\\frac{3n^2}{n^2+8}$", "$\\frac{n^3}{2n^2+1}$"], "optsEn": ["$\\frac{n^2}{2n^2+1}$", "$\\frac{n^2}{n^2+2}$", "$\\frac{3n^2}{n^2+8}$", "$\\frac{n^3}{2n^2+1}$"], "ans": 1, "solBn": "$a_n=\\frac{n^2}{n^2+2}$ বসালে $n=1,2,3,4$ এ যথাক্রমে $\\frac13,\\frac23,\\frac9{11},\\frac89$ পাওয়া যায়।", "solEn": "With $a_n=\\frac{n^2}{n^2+2}$, the first four terms are $\\frac13,\\frac23,\\frac9{11},\\frac89$." }, { "id": 4, "bn": "$\\frac13,\\frac13,\\frac5{27},\\frac7{81},\\ldots$ অনুক্রমটির সাধারণ পদ নিচের কোনটি?", "en": "Which is the general term of $\\frac13,\\frac13,\\frac5{27},\\frac7{81},\\ldots$?", "optsBn": ["$\\frac1{3^n}$", "$\\frac{2n-1}{3^n}$", "$\\frac{2n-1}{3n}$", "$\\frac n{3^n}$"], "optsEn": ["$\\frac1{3^n}$", "$\\frac{2n-1}{3^n}$", "$\\frac{2n-1}{3n}$", "$\\frac n{3^n}$"], "ans": 1, "solBn": "$a_n=\\frac{2n-1}{3^n}$ নিলে $n=1,2,3,4$ এ যথাক্রমে $\\frac13,\\frac13,\\frac5{27},\\frac7{81}$ পাওয়া যায়।", "solEn": "With $a_n=\\frac{2n-1}{3^n}$, the terms for $n=1,2,3,4$ are $\\frac13,\\frac13,\\frac5{27},\\frac7{81}$." }, { "id": 5, "bn": "$\\frac12,\\frac1{10},\\frac1{30},\\ldots$ অনুক্রমটির সাধারণ পদ কোনটি?", "en": "Which is the general term of $\\frac12,\\frac1{10},\\frac1{30},\\ldots$?", "optsBn": ["$\\frac1{n+1}$", "$\\frac1{n^2+1}$", "$\\frac1{n^3+1}$", "$\\frac1{n^3+n}$"], "optsEn": ["$\\frac1{n+1}$", "$\\frac1{n^2+1}$", "$\\frac1{n^3+1}$", "$\\frac1{n^3+n}$"], "ans": 3, "solBn": "সাধারণ পদ $a_n=\\frac1{n^3+n}$। $n=1,2,3$ দিলে $\\frac12,\\frac1{10},\\frac1{30}$ পাওয়া যায়।", "solEn": "The general term is $a_n=\\frac1{n^3+n}$. For $n=1,2,3$ this gives $\\frac12,\\frac1{10},\\frac1{30}$." }, { "id": 6, "bn": "$1,\\frac43,\\frac95,\\ldots$ অনুক্রমটির ২০-তম পদ কোনটি?", "en": "What is the 20th term of $1,\\frac43,\\frac95,\\ldots$?", "optsBn": ["$\\frac{20}{41}$", "$\\frac{20}{39}$", "$\\frac{40}{41}$", "$\\frac{400}{39}$"], "optsEn": ["$\\frac{20}{41}$", "$\\frac{20}{39}$", "$\\frac{40}{41}$", "$\\frac{400}{39}$"], "ans": 3, "solBn": "$a_n=\\frac{n^2}{2n-1}$। তাই $a_{20}=\\frac{20^2}{2(20)-1}=\\frac{400}{39}$।", "solEn": "$a_n=\\frac{n^2}{2n-1}$. Hence $a_{20}=\\frac{20^2}{40-1}=\\frac{400}{39}$." }, { "id": 7, "bn": "$\\frac12,\\frac15,\\frac1{10},\\frac1{17},\\ldots$ অনুক্রমটির ষষ্ঠ পদ কত?", "en": "What is the sixth term of $\\frac12,\\frac15,\\frac1{10},\\frac1{17},\\ldots$?", "optsBn": ["$\\frac1{36}$", "$\\frac1{37}$", "$\\frac1{50}$", "$\\frac1{65}$"], "optsEn": ["$\\frac1{36}$", "$\\frac1{37}$", "$\\frac1{50}$", "$\\frac1{65}$"], "ans": 1, "solBn": "সাধারণ পদ $a_n=\\frac1{n^2+1}$। তাই $a_6=\\frac1{36+1}=\\frac1{37}$।", "solEn": "The general term is $a_n=\\frac1{n^2+1}$. Thus $a_6=\\frac1{37}$." }, { "id": 8, "bn": "একটি অনুক্রমের $n$-তম পদ $\\frac{2-2(-1)^n}{2}$। অনুক্রমটির ৭-তম পদ কত হবে?", "en": "The $n$th term of a sequence is $\\frac{2-2(-1)^n}{2}$. What is its 7th term?", "optsBn": ["−2", "0", "2", "4"], "optsEn": ["−2", "0", "2", "4"], "ans": 2, "solBn": "$a_7=\\frac{2-2(-1)^7}{2}=\\frac{2+2}{2}=2$।", "solEn": "$a_7=\\frac{2-2(-1)^7}{2}=\\frac{2+2}{2}=2$." }, { "id": 9, "bn": "কোনো অনুক্রমের $n$-তম পদ $4n-5$ এবং $n\\in N$ হলে অনুক্রমটির ১৫-তম পদ নিচের কোনটি?", "en": "If the $n$th term is $4n-5$, $n\\in N$, which is the 15th term?", "optsBn": ["55", "60", "65", "75"], "optsEn": ["55", "60", "65", "75"], "ans": 0, "solBn": "$a_{15}=4(15)-5=60-5=55$।", "solEn": "$a_{15}=4(15)-5=55$." }, { "id": 10, "bn": "$U_n=\\frac{1-(-1)^n}{2}$ অনুক্রমটির ১ম ২০টি পদের সমষ্টি কত?", "en": "What is the sum of the first 20 terms of $U_n=\\frac{1-(-1)^n}{2}$?", "optsBn": ["0", "1", "10", "20"], "optsEn": ["0", "1", "10", "20"], "ans": 2, "solBn": "পদগুলো $1,0,1,0,\\ldots$। ২০টি পদের মধ্যে ১০টি ১ এবং ১০টি ০, তাই সমষ্টি $10$।", "solEn": "The sequence is $1,0,1,0,\\ldots$. Among the first 20 terms there are ten 1s and ten 0s, so the sum is $10$." }, { "id": 11, "bn": "$\\frac15+\\frac3{5^2}+\\frac9{5^3}+\\cdots$ ধারাটির সাধারণ পদ কোনটি?", "en": "Which is the general term of $\\frac15+\\frac3{5^2}+\\frac9{5^3}+\\cdots$?", "optsBn": ["$\\frac1{n^2+5}$", "$\\frac{3^n}{5^n-1}$", "$\\frac{3^{n-1}}{5^n}$", "$\\left(\\frac35\\right)^{n-1}$"], "optsEn": ["$\\frac1{n^2+5}$", "$\\frac{3^n}{5^n-1}$", "$\\frac{3^{n-1}}{5^n}$", "$\\left(\\frac35\\right)^{n-1}$"], "ans": 2, "solBn": "$n$-তম পদে লব $3^{n-1}$ এবং হর $5^n$। তাই $a_n=\\frac{3^{n-1}}{5^n}$।", "solEn": "The numerator is $3^{n-1}$ and the denominator is $5^n$, so $a_n=\\frac{3^{n-1}}{5^n}$." }, { "id": 12, "bn": "$7+5+3+\\cdots$ ধারাটির $n$-তম পদ কোনটি?", "en": "What is the $n$th term of $7+5+3+\\cdots$?", "optsBn": ["$9-2n$", "$2n-9$", "$5+2n$", "$5-2n$"], "optsEn": ["$9-2n$", "$2n-9$", "$5+2n$", "$5-2n$"], "ans": 0, "solBn": "এটি সমান্তর ধারা, $a=7,d=-2$। তাই $a_n=a+(n-1)d=7-2(n-1)=9-2n$।", "solEn": "It is an arithmetic sequence with $a=7,d=-2$. Thus $a_n=7-2(n-1)=9-2n$." }, { "id": 13, "bn": "$\\frac4{5^7}-\\frac2{5^6}+\\frac1{5^5}+\\cdots$ অসীম গুণোত্তর ধারাটির সাধারণ অনুপাত নিচের কোনটি?", "en": "Which is the common ratio of $\\frac4{5^7}-\\frac2{5^6}+\\frac1{5^5}+\\cdots$?", "optsBn": ["$-\\frac52$", "$-\\frac25$", "$\\frac25$", "$\\frac52$"], "optsEn": ["$-\\frac52$", "$-\\frac25$", "$\\frac25$", "$\\frac52$"], "ans": 0, "solBn": "$r=\\frac{-2/5^6}{4/5^7}=-\\frac52$।", "solEn": "$r=\\frac{-2/5^6}{4/5^7}=-\\frac52$." }, { "id": 14, "bn": "$\\frac12-\\frac18+\\frac1{32}-\\cdots$ ধারাটির ৭ম পদ কত?", "en": "What is the 7th term of $\\frac12-\\frac18+\\frac1{32}-\\cdots$?", "optsBn": ["$-\\frac1{2^{15}}$", "$-\\frac1{2^{13}}$", "$\\frac1{2^{13}}$", "$\\frac1{2^{15}}$"], "optsEn": ["$-\\frac1{2^{15}}$", "$-\\frac1{2^{13}}$", "$\\frac1{2^{13}}$", "$\\frac1{2^{15}}$"], "ans": 2, "solBn": "$a=\\frac12,\\ r=-\\frac14$। তাই $a_7=ar^6=\\frac12\\left(-\\frac14\\right)^6=\\frac1{2^{13}}$।", "solEn": "$a=\\frac12,\\ r=-\\frac14$. Thus $a_7=\\frac12(-\\frac14)^6=\\frac1{2^{13}}$." }, { "id": 15, "bn": "$\\frac12+1+\\frac32+\\cdots$ ধারাটির ৮ম পদ কোনটি?", "en": "What is the 8th term of $\\frac12+1+\\frac32+\\cdots$?", "optsBn": ["4", "5", "6", "7"], "optsEn": ["4", "5", "6", "7"], "ans": 0, "solBn": "এটি $a_n=\\frac n2$। তাই $a_8=4$।", "solEn": "The sequence has $a_n=\\frac n2$. Hence $a_8=4$." }, { "id": 16, "bn": "$1+\\frac1{\\sqrt3}+\\frac13+\\cdots$ ধারাটির ৯ম পদের মান কত?", "en": "What is the 9th term of $1+\\frac1{\\sqrt3}+\\frac13+\\cdots$?", "optsBn": ["$\\frac1{81}$", "$\\frac1{27}$", "$\\frac19$", "$\\frac13$"], "optsEn": ["$\\frac1{81}$", "$\\frac1{27}$", "$\\frac19$", "$\\frac13$"], "ans": 0, "solBn": "$a=1,r=\\frac1{\\sqrt3}$। তাই $a_9=r^8=(\\frac1{\\sqrt3})^8=\\frac1{3^4}=\\frac1{81}$।", "solEn": "$a=1,r=\\frac1{\\sqrt3}$. Hence $a_9=r^8=(1/\\sqrt3)^8=1/81$." }, { "id": 17, "bn": "কোনো ধারার $n$-তম পদ $5n-2$ হলে ধারাটির ৫ম ও ৬ষ্ঠ পদের গুণফল কত?", "en": "If the $n$th term is $5n-2$, what is the product of the 5th and 6th terms?", "optsBn": ["924", "644", "23", "28"], "optsEn": ["924", "644", "23", "28"], "ans": 1, "solBn": "$a_5=5(5)-2=23,\\ a_6=5(6)-2=28$। তাই গুণফল $23\\times28=644$।", "solEn": "$a_5=23,\\ a_6=28$. Therefore the product is $23\\times28=644$." }, { "id": 18, "bn": "নিচের কোন ধারাটির অসীমতক সমষ্টি আছে?", "en": "Which of the following series has a finite infinite sum?", "optsBn": ["$\\frac13-\\frac49+\\frac{16}{27}-\\frac{64}{81}+\\cdots$", "$\\frac14-\\frac5{16}+\\frac{25}{64}-\\frac{125}{256}+\\cdots$", "$\\frac34-\\frac9{16}+\\frac{27}{64}-\\frac{81}{256}+\\cdots$", "$\\frac12-\\frac34+\\frac98-\\frac{27}{16}+\\cdots$"], "optsEn": ["$\\frac13-\\frac49+\\frac{16}{27}-\\frac{64}{81}+\\cdots$", "$\\frac14-\\frac5{16}+\\frac{25}{64}-\\frac{125}{256}+\\cdots$", "$\\frac34-\\frac9{16}+\\frac{27}{64}-\\frac{81}{256}+\\cdots$", "$\\frac12-\\frac34+\\frac98-\\frac{27}{16}+\\cdots$"], "ans": 2, "solBn": "গুণোত্তর ধারার অসীমতক সমষ্টি থাকতে হলে $|r|<1$। ক-এর $|r|=\\frac43$, খ-এর $\\frac54$, গ-এর $\\frac34$ এবং ঘ-এর $\\frac32$। তাই গ সঠিক।", "solEn": "An infinite geometric sum exists when $|r|<1$. The ratios are $4/3$, $5/4$, $3/4$, and $3/2$ in magnitude. Therefore option C is correct." }, { "id": 19, "bn": "$\\sqrt3+1+\\frac1{\\sqrt3}+\\frac13+\\frac1{3\\sqrt3}+\\cdots$ গুণোত্তর ধারার অসীমতক সমষ্টি কত?", "en": "What is the infinite sum of $\\sqrt3+1+\\frac1{\\sqrt3}+\\frac13+\\frac1{3\\sqrt3}+\\cdots$?", "optsBn": ["$\\frac3{\\sqrt3-1}$", "$\\sqrt3-1$", "$-\\frac{2\\sqrt3}{\\sqrt3-1}$", "$-\\frac3{1-\\sqrt3}$"], "optsEn": ["$\\frac3{\\sqrt3-1}$", "$\\sqrt3-1$", "$-\\frac{2\\sqrt3}{\\sqrt3-1}$", "$-\\frac3{1-\\sqrt3}$"], "ans": 0, "solBn": "$a=\\sqrt3,\\ r=\\frac1{\\sqrt3}$। তাই $S_\\infty=\\frac{\\sqrt3}{1-1/\\sqrt3}=\\frac3{\\sqrt3-1}$।", "solEn": "$a=\\sqrt3,\\ r=1/\\sqrt3$. Hence $S_\\infty=\\frac{\\sqrt3}{1-1/\\sqrt3}=\\frac3{\\sqrt3-1}$." }, { "id": 20, "bn": "একটি গুণোত্তর ধারার ১ম পদ ৩ এবং সাধারণ অনুপাত $\\frac13$ হলে, ধারায় অসীমতক সমষ্টি কত?", "en": "If the first term of a geometric series is 3 and the common ratio is $\\frac13$, what is its infinite sum?", "optsBn": ["$\\frac32$", "$\\frac92$", "6", "9"], "optsEn": ["$\\frac32$", "$\\frac92$", "6", "9"], "ans": 1, "solBn": "$S_\\infty=\\frac{a}{1-r}=\\frac3{1-\\frac13}=\\frac3{\\frac23}=\\frac92$।", "solEn": "$S_\\infty=\\frac{a}{1-r}=\\frac3{1-\\frac13}=\\frac92$." }, { "id": 21, "bn": "$1-\\frac27+\\frac4{49}-\\frac8{343}+\\cdots$ ধারাটির (অসীমতক) সমষ্টি নিচের কোনটি?", "en": "Which is the infinite sum of $1-\\frac27+\\frac4{49}-\\frac8{343}+\\cdots$?", "optsBn": ["$\\frac29$", "$\\frac79$", "$\\frac97$", "$\\frac75$"], "optsEn": ["$\\frac29$", "$\\frac79$", "$\\frac97$", "$\\frac75$"], "ans": 1, "solBn": "$a=1,\\ r=-\\frac27$। তাই $S_\\infty=\\frac1{1+2/7}=\\frac79$।", "solEn": "$a=1,\\ r=-2/7$. Thus $S_\\infty=\\frac1{1+2/7}=\\frac79$." }, { "id": 22, "bn": "$\\frac13+\\frac1{3^2}+\\frac1{3^3}+\\cdots$ ধারাটির অসীমতক সমষ্টি কত?", "en": "What is the infinite sum of $\\frac13+\\frac1{3^2}+\\frac1{3^3}+\\cdots$?", "optsBn": ["$\\frac13$", "$\\frac12$", "2", "3"], "optsEn": ["$\\frac13$", "$\\frac12$", "2", "3"], "ans": 1, "solBn": "$a=\\frac13,\\ r=\\frac13$। তাই $S_\\infty=\\frac{1/3}{1-1/3}=\\frac12$।", "solEn": "$a=\\frac13,\\ r=\\frac13$. Hence $S_\\infty=\\frac{1/3}{1-1/3}=\\frac12$." }, { "id": 23, "bn": "$\\frac12+\\left(-\\frac14\\right)+\\frac18+\\left(-\\frac1{16}\\right)+\\cdots$ ধারাটির অসীমতক সমষ্টি কত?", "en": "What is the infinite sum of $\\frac12-\\frac14+\\frac18-\\frac1{16}+\\cdots$?", "optsBn": ["1", "$\\frac12$", "$\\frac13$", "$\\frac14$"], "optsEn": ["1", "$\\frac12$", "$\\frac13$", "$\\frac14$"], "ans": 2, "solBn": "$a=\\frac12,\\ r=-\\frac12$। তাই $S_\\infty=\\frac{1/2}{1+1/2}=\\frac13$।", "solEn": "$a=\\frac12,\\ r=-\\frac12$. Thus $S_\\infty=\\frac13$." }, { "id": 24, "bn": "$16-4+1-\\frac14+\\cdots$ গুণোত্তর ধারাটির অসীমতক সমষ্টি কত?", "en": "What is the infinite sum of the geometric series $16-4+1-\\frac14+\\cdots$?", "optsBn": ["12", "$\\frac{64}{5}$", "20", "$\\frac{64}{3}$"], "optsEn": ["12", "$\\frac{64}{5}$", "20", "$\\frac{64}{3}$"], "ans": 1, "solBn": "$a=16,\\ r=-\\frac14$। তাই $S_\\infty=\\frac{16}{1+1/4}=\\frac{64}{5}$।", "solEn": "$a=16,\\ r=-1/4$. Hence $S_\\infty=\\frac{64}{5}$." }, { "id": 25, "bn": "$5-1+\\frac15-\\frac1{25}+\\cdots$ ধারাটির অসীমতক সমষ্টি কত?", "en": "What is the infinite sum of $5-1+\\frac15-\\frac1{25}+\\cdots$?", "optsBn": ["$-\\frac{25}{6}$", "$\\frac16$", "$\\frac14$", "$\\frac{25}{6}$"], "optsEn": ["$-\\frac{25}{6}$", "$\\frac16$", "$\\frac14$", "$\\frac{25}{6}$"], "ans": 3, "solBn": "$a=5,\\ r=-\\frac15$। তাই $S_\\infty=\\frac5{1+1/5}=\\frac{25}{6}$।", "solEn": "$a=5,\\ r=-1/5$. Hence $S_\\infty=\\frac{25}{6}$." }, { "id": 26, "bn": "$\\frac15-\\frac2{5^2}+\\frac4{5^3}-\\frac8{5^4}-\\cdots$ ধারাটির অসীমতক সমষ্টি কত?", "en": "What is the infinite sum of $\\frac15-\\frac2{5^2}+\\frac4{5^3}-\\frac8{5^4}-\\cdots$?", "optsBn": ["$\\frac13$", "$\\frac17$", "$\\frac27$", "$\\frac23$"], "optsEn": ["$\\frac13$", "$\\frac17$", "$\\frac27$", "$\\frac23$"], "ans": 1, "solBn": "$a=\\frac15,\\ r=-\\frac25$। তাই $S_\\infty=\\frac{1/5}{1+2/5}=\\frac17$।", "solEn": "$a=1/5,\\ r=-2/5$. Hence $S_\\infty=\\frac17$." }, { "id": 27, "bn": "কোনো অসীম গুণোত্তর ধারার সাধারণ অনুপাত $\\frac12$ এবং অসীমতক সমষ্টি $\\frac23$ হলে প্রথম পদ কত?", "en": "If the common ratio of an infinite geometric series is $\\frac12$ and its infinite sum is $\\frac23$, what is the first term?", "optsBn": ["$-\\frac23$", "$-\\frac13$", "$\\frac23$", "$\\frac13$"], "optsEn": ["$-\\frac23$", "$-\\frac13$", "$\\frac23$", "$\\frac13$"], "ans": 3, "solBn": "$a=S_\\infty(1-r)=\\frac23(1-\\frac12)=\\frac13$।", "solEn": "$a=S_\\infty(1-r)=\\frac23(1-\\frac12)=\\frac13$." }, { "id": 28, "bn": "একটি গুণোত্তর ধারার ১ম পদ 1 এবং অসীমতক সমষ্টি $\\frac{2\\sqrt3}{2\\sqrt3-1}$ হলে ধারাটির সাধারণ অনুপাত কত?", "en": "If the first term is 1 and the infinite sum is $\\frac{2\\sqrt3}{2\\sqrt3-1}$, what is the common ratio?", "optsBn": ["$\\frac1{2\\sqrt3}$", "1", "$-\\frac1{2\\sqrt3}$", "$-\\frac1{2\\sqrt3-1}$"], "optsEn": ["$\\frac1{2\\sqrt3}$", "1", "$-\\frac1{2\\sqrt3}$", "$-\\frac1{2\\sqrt3-1}$"], "ans": 0, "solBn": "$S=\\frac1{1-r}=\\frac{2\\sqrt3}{2\\sqrt3-1}$। তাই $1-r=\\frac{2\\sqrt3-1}{2\\sqrt3}$ এবং $r=\\frac1{2\\sqrt3}$।", "solEn": "From $S=\\frac1{1-r}=\\frac{2\\sqrt3}{2\\sqrt3-1}$, we get $r=\\frac1{2\\sqrt3}$." }, { "id": 29, "bn": "একটি গুণোত্তর ধারার ১ম পদ $\\frac14$ এবং অসীমতক সমষ্টি $\\frac25$ হলে, ধারাটির সাধারণ অনুপাত কত?", "en": "If the first term is $\\frac14$ and the infinite sum is $\\frac25$, what is the common ratio?", "optsBn": ["$\\frac15$", "$\\frac14$", "$\\frac38$", "$\\frac23$"], "optsEn": ["$\\frac15$", "$\\frac14$", "$\\frac38$", "$\\frac23$"], "ans": 2, "solBn": "$S=\\frac{a}{1-r}$ থেকে $\\frac25=\\frac{1/4}{1-r}$। তাই $1-r=\\frac58$, অর্থাৎ $r=\\frac38$।", "solEn": "From $\\frac25=\\frac{1/4}{1-r}$, we get $1-r=\\frac58$, so $r=\\frac38$." }, { "id": 30, "bn": "কোনো গুণোত্তর ধারার সাধারণ অনুপাত $\\frac1{2x+3}$ এবং অসীমতক সমষ্টি $\\frac1{2(x+1)}$ হলে ধারাটির ১ম পদ নিচের কোনটি?", "en": "If the common ratio is $\\frac1{2x+3}$ and the infinite sum is $\\frac1{2(x+1)}$, which is the first term?", "optsBn": ["$\\frac1{2x-3}$", "$\\frac1{2(x-1)}$", "$\\frac1{2x+2}$", "$\\frac1{2x+3}$"], "optsEn": ["$\\frac1{2x-3}$", "$\\frac1{2(x-1)}$", "$\\frac1{2x+2}$", "$\\frac1{2x+3}$"], "ans": 3, "solBn": "$a=S(1-r)=\\frac1{2(x+1)}\\left(1-\\frac1{2x+3}\\right)=\\frac1{2x+3}$।", "solEn": "$a=S(1-r)=\\frac1{2(x+1)}(1-\\frac1{2x+3})=\\frac1{2x+3}$." }, { "id": 31, "bn": "$-7+7-7+7-\\cdots$ ধারাটির প্রথম $(2n+1)$ সংখ্যক পদের যোগফল কত?", "en": "What is the sum of the first $(2n+1)$ terms of $-7+7-7+7-\\cdots$?", "optsBn": ["7", "1", "0", "−7"], "optsEn": ["7", "1", "0", "−7"], "ans": 3, "solBn": "$(2n+1)$ একটি বিজোড় সংখ্যা; তাই একটি বেশি ঋণাত্মক পদ থাকবে। জোড়ায় জোড়ায় যোগফল 0, অবশিষ্ট পদ $-7$।", "solEn": "Since $(2n+1)$ is odd, one negative term remains after pairing terms to zero. The sum is $-7$." }, { "id": 32, "bn": "$\\frac1{2x+1}+\\frac1{(2x+1)^2}+\\frac1{(2x+1)^3}+\\cdots$ একটি অসীম গুণোত্তর ধারা। $x$-এর উপর কী শর্ত আরোপ করলে অসীমতক সমষ্টি থাকবে?", "en": "For $\\frac1{2x+1}+\\frac1{(2x+1)^2}+\\frac1{(2x+1)^3}+\\cdots$, what condition on $x$ makes the infinite sum exist?", "optsBn": ["$x<0$ অথবা $x<-1$", "$x>0$ অথবা $x<-1$", "$x<0$ অথবা $x>-1$", "$x>0$ অথবা $x>-1$"], "optsEn": ["$x<0$ or $x<-1$", "$x>0$ or $x<-1$", "$x<0$ or $x>-1$", "$x>0$ or $x>-1$"], "ans": 1, "solBn": "অসীমতক সমষ্টির জন্য $\\left|\\frac1{2x+1}\\right|<1$। তাই $|2x+1|>1$, অর্থাৎ $x>0$ অথবা $x<-1$।", "solEn": "For convergence, $|1/(2x+1)|<1$, so $|2x+1|>1$. Therefore $x>0$ or $x<-1$." }, { "id": 33, "bn": "$-1<\\frac1{x+1}<1$ হলে $x$-এর ক্ষেত্রে কোনটি সঠিক?", "en": "If $-1<\\frac1{x+1}<1$, which condition on $x$ is correct?", "optsBn": ["$x>-2$ অথবা $x>0$", "$x<-2$ অথবা $x<0$", "$x<-2$ অথবা $x>0$", "$x>-2$ অথবা $x<0$"], "optsEn": ["$x>-2$ or $x>0$", "$x<-2$ or $x<0$", "$x<-2$ or $x>0$", "$x>-2$ or $x<0$"], "ans": 2, "solBn": "$-1<\\frac1{x+1}<1$ অর্থ $\\left|\\frac1{x+1}\\right|<1$। তাই $|x+1|>1$, ফলে $x>0$ অথবা $x<-2$।", "solEn": "$\\left|1/(x+1)\\right|<1$ implies $|x+1|>1$, hence $x>0$ or $x<-2$." }, { "id": 34, "bn": "$1+r+r^2+r^3+\\cdots+r^n=?$", "en": "$1+r+r^2+r^3+\\cdots+r^n=?$", "optsBn": ["$\\frac{r^{n-1}-1}{r-1}$", "$\\frac{r^n-1}{r-1}$", "$\\frac{r^{n+1}-1}{r-1}$", "$\\frac1{r-1}$"], "optsEn": ["$\\frac{r^{n-1}-1}{r-1}$", "$\\frac{r^n-1}{r-1}$", "$\\frac{r^{n+1}-1}{r-1}$", "$\\frac1{r-1}$"], "ans": 2, "solBn": "সসীম গুণোত্তর ধারার সূত্র: $S_n=\\frac{r^{n+1}-1}{r-1}$, যেখানে $r\\ne1$।", "solEn": "The finite geometric-series formula is $S_n=\\frac{r^{n+1}-1}{r-1}$ for $r\\ne1$." }, { "id": 35, "bn": "নিচের কোনটি $0.\\dot1\\dot4$-এর মূলদীয় ভগ্নাংশ? (ছবির দাগ/বার-চিহ্ন অনুযায়ী)", "en": "Which is the rational fraction of the recurring decimal $0.\\dot1\\dot4$? (based on the recurring-mark notation in the image)", "optsBn": ["$\\frac7{45}$", "$\\frac{13}{90}$", "$\\frac{14}{99}$", "$\\frac{13}{99}$"], "optsEn": ["$\\frac7{45}$", "$\\frac{13}{90}$", "$\\frac{14}{99}$", "$\\frac{13}{99}$"], "ans": 1, "solBn": "ছবির পুনরাবৃত্ত দশমিক চিহ্নের পাঠ অনুযায়ী $0.1\\overline4=\\frac{13}{90}$।", "solEn": "Interpreting the recurring notation as $0.1\\overline4$, we get $\\frac{13}{90}$." }, { "id": 36, "bn": "$5.7\\overline{83}$-এর সাধারণ ভগ্নাংশে প্রকাশ কোনটি?", "en": "Which is the ordinary fraction form of $5.7\\overline{83}$?", "optsBn": ["$\\frac{5783}{1000}$", "$\\frac{5783}{99}$", "$\\frac{5726}{99}$", "$\\frac{5726}{990}$"], "optsEn": ["$\\frac{5783}{1000}$", "$\\frac{5783}{99}$", "$\\frac{5726}{99}$", "$\\frac{5726}{990}$"], "ans": 3, "solBn": "$5.7\\overline{83}=\\frac{5783-57}{990}=\\frac{5726}{990}$।", "solEn": "$5.7\\overline{83}=\\frac{5783-57}{990}=\\frac{5726}{990}$." }, { "id": 37, "bn": "নিচের কোনটি $1.\\overline2$-এর মূলদীয় ভগ্নাংশ?", "en": "Which is the rational fraction of $1.\\overline2$?", "optsBn": ["$\\frac{11}{9}$", "$\\frac43$", "$1\\frac29$", "$1\\frac13$"], "optsEn": ["$\\frac{11}{9}$", "$\\frac43$", "$1\\frac29$", "$1\\frac13$"], "ans": 0, "solBn": "$1.\\overline2=1+\\frac29=\\frac{11}{9}$।", "solEn": "$1.\\overline2=1+\\frac29=\\frac{11}{9}$." }, { "id": 38, "bn": "$1.1\\overline{45}=?$", "en": "$1.1\\overline{45}=?$", "optsBn": ["$\\frac{63}{55}$", "$\\frac{1145}{990}$", "$\\frac{1134}{9900}$", "$\\frac{1134}{9999}$"], "optsEn": ["$\\frac{63}{55}$", "$\\frac{1145}{990}$", "$\\frac{1134}{9900}$", "$\\frac{1134}{9999}$"], "ans": 0, "solBn": "$x=1.1\\overline{45}=\\frac{1145-11}{990}=\\frac{1134}{990}=\\frac{63}{55}$।", "solEn": "$x=1.1\\overline{45}=\\frac{1145-11}{990}=\\frac{1134}{990}=\\frac{63}{55}$." }, { "id": 39, "bn": "$2.\\overline{35}$-কে মূলদীয় ভগ্নাংশে প্রকাশ করলে নিচের কোনটি হবে?", "en": "Which fraction represents $2.\\overline{35}$?", "optsBn": ["$\\frac{233}{990}$", "$\\frac{235}{100}$", "$\\frac{233}{99}$", "$\\frac{235}{99}$"], "optsEn": ["$\\frac{233}{990}$", "$\\frac{235}{100}$", "$\\frac{233}{99}$", "$\\frac{235}{99}$"], "ans": 2, "solBn": "$2.\\overline{35}=\\frac{235-2}{99}=\\frac{233}{99}$।", "solEn": "$2.\\overline{35}=\\frac{235-2}{99}=\\frac{233}{99}$." }, { "id": 40, "bn": "$5.0\\overline{75}$-এর মূলদীয় ভগ্নাংশ নিচের কোনটি?", "en": "Which is the rational fraction of $5.0\\overline{75}$?", "optsBn": ["$\\frac{5075}{99}$", "$\\frac{1675}{33}$", "$\\frac{1015}{198}$", "$\\frac{335}{66}$"], "optsEn": ["$\\frac{5075}{99}$", "$\\frac{1675}{33}$", "$\\frac{1015}{198}$", "$\\frac{335}{66}$"], "ans": 3, "solBn": "$5.0\\overline{75}=\\frac{5075-50}{990}=\\frac{5025}{990}=\\frac{335}{66}$।", "solEn": "$5.0\\overline{75}=\\frac{5075-50}{990}=\\frac{5025}{990}=\\frac{335}{66}$." }];
+
+        let language = 'bn';
+        let started = false;
+        let submitted = false;
+        let remainingSeconds = 40 * 60;
+        let timerId = null;
+        let startDate = null;
+        let endDate = null;
+        const answers = {};
+
+        const $ = id => document.getElementById(id);
+        const labels = {
+            bn: {
+                attempted: 'Attempted', notStarted: 'Not Started', running: 'Running', submitted: 'Submitted',
+                instruction: 'ভাষা নির্বাচন করুন, শিক্ষার্থীর তথ্য পূরণ করুন এবং Exam Start চাপুন। সময় শেষ হলে পরীক্ষা স্বয়ংক্রিয়ভাবে Submit হবে।',
+                submit: 'Submit', start: 'Exam Start', correct: 'সঠিক', wrong: 'ভুল', unanswered: 'উত্তর দেওয়া হয়নি',
+                solution: 'See Complete Solutions', solutionTitle: 'Complete Solution',
+                score: 'প্রাপ্ত নম্বর', outOf: ' / 40', result: 'পরীক্ষা সম্পন্ন হয়েছে। সঠিক উত্তর সবুজ এবং ভুল/অনুত্তরিত উত্তর লালভাবে দেখানো হয়েছে।'
+            },
+            en: {
+                attempted: 'Attempted', notStarted: 'Not Started', running: 'Running', submitted: 'Submitted',
+                instruction: 'Select a language, fill in the student information, and click Exam Start. The test will auto-submit when time ends.',
+                submit: 'Submit', start: 'Exam Start', correct: 'Correct', wrong: 'Wrong', unanswered: 'Unanswered',
+                solution: 'See Complete Solutions', solutionTitle: 'Complete Solution',
+                score: 'Score', outOf: ' / 40', result: 'Exam completed. Correct answers are shown in green and wrong/unanswered answers in red.'
+            }
+        };
+
+        function escapeHtml(s) {
+            return s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        }
+
+        function renderQuestions() {
+            const pages = [$('pages')];
+            const page1 = document.createElement('section');
+            const page2 = document.createElement('section');
+            page1.className = 'questions-page';
+            page2.className = 'questions-page';
+            page1.innerHTML = '<div class="page-label">Page 1 — Questions 1–20</div><div class="questions-grid" id="grid1"></div>';
+            page2.innerHTML = '<div class="page-label">Page 2 — Questions 21–40</div><div class="questions-grid" id="grid2"></div>';
+            $('pages').replaceChildren(page1, page2);
+
+            QUESTIONS.forEach((q, idx) => {
+                const card = document.createElement('article');
+                card.className = 'question';
+                card.id = 'q-' + q.id;
+                const opts = language === 'bn' ? q.optsBn : q.optsEn;
+                const text = language === 'bn' ? q.bn : q.en;
+                let optionsHtml = opts.map((o, i) => {
+                    const label = language === 'bn' ? ['ক', 'খ', 'গ', 'ঘ'][i] : ['A', 'B', 'C', 'D'][i];
+                    return `<label class="option" id="opt-${q.id}-${i}">
+        <input type="radio" name="q${q.id}" value="${i}" onchange="updateAttempted()" disabled>
+        <span><b>${label}.</b> ${o}</span>
+      </label>`;
+                }).join('');
+                card.innerHTML = `
+      <div class="qtext">${q.id}. ${text}</div>
+      <div class="options">${optionsHtml}</div>
+      <div class="status" id="status-${q.id}"></div>
+      <div class="solution-wrap">
+        <button class="solution-btn" onclick="toggleSolution(${q.id})" disabled>${labels[language].solution}</button>
+        <div class="solution" id="solution-${q.id}">
+          <b>${labels[language].solutionTitle}:</b><br>
+          ${language === 'bn' ? q.solBn : q.solEn}
+        </div>
+      </div>`;
+                (idx < 20 ? $('grid1') : $('grid2')).appendChild(card);
+            });
+            if (window.MathJax) MathJax.typesetPromise();
+        }
+
+        function setLanguage(lang) {
+            if (started && !submitted) {
+                // preserve selections while switching language
+            }
+            language = lang;
+            $('bnBtn').classList.toggle('active', lang === 'bn');
+            $('enBtn').classList.toggle('active', lang === 'en');
+            $('instructions').textContent = labels[lang].instruction;
+            $('submitBtn').textContent = labels[lang].submit;
+            $('startBtn').textContent = labels[lang].start;
+            renderQuestions();
+            if (submitted) showResultDetails();
+            if (window.MathJax) MathJax.typesetPromise();
+        }
+
+        function startExam() {
+            if (started) return;
+            started = true;
+            submitted = false;
+            startDate = new Date();
+            endDate = new Date(startDate.getTime() + 40 * 60 * 1000);
+            $('startTime').textContent = formatTime(startDate);
+            $('endTime').textContent = formatTime(endDate);
+            $('examStatus').textContent = labels[language].running;
+            $('startBtn').disabled = true;
+            $('submitBtn').disabled = false;
+            document.querySelectorAll('.option input').forEach(x => x.disabled = false);
+            timerId = setInterval(tick, 1000);
+            tick();
+        }
+
+        function tick() {
+            if (!started || submitted) return;
+            remainingSeconds--;
+            if (remainingSeconds <= 0) {
+                remainingSeconds = 0;
+                updateTimer();
+                submitExam(true);
+                return;
+            }
+            updateTimer();
+        }
+
+        function updateTimer() {
+            const m = Math.floor(remainingSeconds / 60).toString().padStart(2, '0');
+            const s = (remainingSeconds % 60).toString().padStart(2, '0');
+            $('timerText').textContent = `${m}:${s}`;
+            $('remaining').textContent = `${m}:${s}`;
+        }
+
+        function formatTime(d) {
+            return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        }
+
+        function updateAttempted() {
+            const count = QUESTIONS.filter(q => document.querySelector(`input[name="q${q.id}"]:checked`)).length;
+            $('attempted').textContent = `${count} / 40`;
+        }
+
+        function submitExam(auto = false) {
+            if (!started || submitted) return;
+            if (!auto && !confirm(language === 'bn' ? 'আপনি কি Answer Sheet Submit করতে চান?' : 'Do you want to submit the answer sheet?')) return;
+            submitted = true;
+            clearInterval(timerId);
+            $('examStatus').textContent = labels[language].submitted;
+            $('submitBtn').disabled = true;
+            document.querySelectorAll('.option input').forEach(x => x.disabled = true);
+            document.querySelectorAll('.solution-btn').forEach(x => x.disabled = false);
+
+            let score = 0;
+            QUESTIONS.forEach(q => {
+                const selected = document.querySelector(`input[name="q${q.id}"]:checked`);
+                const selectedIndex = selected ? Number(selected.value) : null;
+                const status = $('status-' + q.id);
+                const correctOpt = $('opt-' + q.id + '-' + q.ans);
+                correctOpt.classList.add('correct');
+                if (selectedIndex === q.ans) {
+                    score++;
+                    status.textContent = '✓ ' + labels[language].correct;
+                    status.className = 'status correct';
+                } else {
+                    status.textContent = selectedIndex === null ? '○ ' + labels[language].unanswered : '✗ ' + labels[language].wrong;
+                    status.className = 'status wrong';
+                    if (selectedIndex !== null) $('opt-' + q.id + '-' + selectedIndex).classList.add('wrong');
+                }
+            });
+            $('scoreText').textContent = `${labels[language].score}: ${score}${labels[language].outOf}`;
+            $('resultNote').textContent = labels[language].result;
+            $('resultPanel').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (window.MathJax) MathJax.typesetPromise();
+        }
+
+        function showResultDetails() {
+            if (!submitted) return;
+            QUESTIONS.forEach(q => {
+                const correctOpt = $('opt-' + q.id + '-' + q.ans);
+                if (correctOpt) correctOpt.classList.add('correct');
+            });
+        }
+
+        function toggleSolution(id) {
+            const el = $('solution-' + id);
+            el.classList.toggle('open');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            $('examDate').value = new Date().toISOString().slice(0, 10);
+            renderQuestions();
+            updateTimer();
+            $('instructions').textContent = labels[language].instruction;
+        });
+    </script>
+</body>
+
+</html>

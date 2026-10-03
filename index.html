@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSC Preparation Test 2027 - Higher Math</title>
+
+    <!-- MathJax for rendering Mathematical Equations -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --primary: #0056b3;
+            --bg-color: #f4f7f6;
+            --container-bg: #ffffff;
+            --text-main: #333;
+        }
+    
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+        }
+    
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            background: var(--container-bg);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    
+        .text-center {
+            text-align: center;
+        }
+    
+        h1,
+        h2,
+        h3,
+        h4,
+        p {
+            margin: 5px 0;
+        }
+    
+        .header-info {
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+    
+        .student-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+    
+        .student-details input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+    
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+    
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: var(--primary);
+            color: white;
+            transition: background 0.3s;
+        }
+    
+        button:hover {
+            background-color: #004494;
+        }
+    
+        .btn-success {
+            background-color: #28a745;
+        }
+    
+        .btn-success:hover {
+            background-color: #218838;
+        }
+    
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+    
+        .timer-bar {
+            background-color: #ffeeba;
+            color: #856404;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            border-radius: 5px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+    
+        .question-card {
+            background: #fdfdfd;
+            border: 1px solid #e0e0e0;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+    
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+    
+        .options-grid label {
+            background: #f8f9fa;
+            padding: 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+    
+        .solution-box {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border-left: 4px solid #17a2b8;
+            display: none;
+            font-size: 14px;
+        }
+    
+        #exam-screen,
+        #result-screen {
+            display: none;
+        }
+    
+        /* ========================================================
+               PRINT SPECIFIC CSS - FOR A4 SINGLE PAPER, BOTH SIDES
+               ======================================================== */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 10mm;
+                /* Narrow margins to fit 40 qs */
+            }
+    
+            body {
+                background: white;
+                font-size: 10pt;
+                /* Reduced font size to save space */
+                padding: 0;
+                margin: 0;
+                color: black;
+            }
+    
+            .container {
+                max-width: 100%;
+                box-shadow: none;
+                border: none;
+                padding: 0;
+                margin: 0;
+            }
+    
+            /* Hide everything that shouldn't be printed */
+            .no-print,
+            #timerBar,
+            #setup-screen,
+            .solution-box {
+                display: none !important;
+            }
+    
+            /* Compact Header for Print */
+            .header-info {
+                border-bottom: 1px solid black;
+                padding-bottom: 5px;
+                margin-bottom: 10px;
+            }
+    
+            .header-info h2 {
+                font-size: 14pt;
+                margin: 2px 0;
+            }
+    
+            .header-info h3 {
+                font-size: 11pt;
+                margin: 2px 0;
+            }
+    
+            .header-info h4 {
+                font-size: 10pt;
+                margin: 2px 0;
+                font-weight: normal;
+            }
+    
+            .header-info p {
+                font-size: 9pt;
+            }
+    
+            /* Force Student Details to Show on Print */
+            .student-details {
+                display: flex !important;
+                justify-content: space-between;
+                margin-bottom: 10px;
+                gap: 10px;
+            }
+    
+            .student-details input {
+                border: none;
+                border-bottom: 1px dotted black;
+                /* Printable dotted line for writing */
+                border-radius: 0;
+                padding: 2px;
+                background: transparent;
+                width: 32%;
+                font-size: 10pt;
+            }
+    
+            /* 2-Column Layout Magic */
+            #questions-container {
+                column-count: 2;
+                column-gap: 20px;
+                width: 100%;
+            }
+    
+            /* Compact Question Cards */
+            .question-card {
+                background: transparent;
+                border: none;
+                border-bottom: 1px dashed #ddd;
+                /* Light separator */
+                padding: 0 0 6px 0;
+                margin-bottom: 6px;
+                break-inside: avoid;
+                /* PREVENTS QUESTION SPLITTING ACROSS COLUMNS */
+                page-break-inside: avoid;
+                /* PREVENTS QUESTION SPLITTING ACROSS PAGES */
+            }
+    
+            .question-card p {
+                margin: 0 0 4px 0;
+                font-size: 10pt;
+                font-weight: 600;
+                line-height: 1.3;
+            }
+    
+            /* Compact Options for Print */
+            .options-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                /* 2 options per line */
+                gap: 4px;
+                margin-top: 0;
+            }
+    
+            .options-grid label {
+                background: transparent;
+                padding: 0;
+                font-size: 9.5pt;
+                /* Smaller font for options */
+                line-height: 1.2;
+            }
+    
+            input[type="radio"] {
+                margin: 0 4px 0 0;
+                transform: scale(0.8);
+                /* Shrink radio buttons slightly */
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container" id="main-container">
+
+        <!-- SETUP SCREEN -->
+        <div id="setup-screen" class="text-center">
+            <h2>SSC Preparation Test 2027</h2>
+            <h2>Instractor: MD. Rashid [Assistant Professor]  Contact: 01711008786</h2>
+            <h3>Higher Mathematics (Chapter: 7)</h3>
+            <p>Select your language to begin the exam / পরীক্ষার ভাষা নির্বাচন করুন</p>
+            <div class="controls">
+                <button onclick="initExam('bn')">Bangla Version</button>
+                <button onclick="initExam('en')">English Version</button>
+            </div>
+        </div>
+
+        <!-- EXAM SCREEN -->
+        <div id="exam-screen">
+            <div class="header-info text-center">
+                <h2>SSC Preparation Test 2027</h2>
+                <h3>Subject: Higher Mathematics | Subject Code: 126 | Chapter 7</h3>
+                <h4>Instructor: MD. Rashid, Assistant Professor in Mathematics, Contact: 01711008786</h4>
+                <p><strong>Time: 40 Minutes | MCQ - 40 | Full Marks: 40</strong></p>
+            </div>
+
+            <div class="no-print student-details">
+                <input type="text" id="studentName" placeholder="Student Name: ... ... ...">
+                <input type="text" id="schoolName" placeholder="School/College: ... ... ...">
+                <input type="text" id="examDate" placeholder="Date: ... ... ...">
+            </div>
+
+            <div class="timer-bar no-print" id="timerBar">
+                Time Remaining: <span id="timeDisplay">40:00</span>
+            </div>
+
+            <div class="controls no-print" id="startControls">
+                <button class="btn-success" onclick="startExam()" id="startBtn">Exam Start</button>
+                <button class="btn-secondary" onclick="window.print()">Print Questions</button>
+            </div>
+
+            <form id="examForm" style="display: none;">
+                <div id="questions-container">
+                    <!-- Questions injected via JS -->
+                </div>
+                <div class="text-center no-print" style="margin-top: 20px;">
+                    <button type="button" class="btn-success" onclick="submitExam()">Submit Answer Sheet</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- RESULT SCREEN -->
+        <div id="result-screen" class="text-center">
+            <h2>Exam Completed!</h2>
+            <h1 id="scoreDisplay" style="color: var(--primary); font-size: 48px;"></h1>
+            <p id="feedbackDisplay"></p>
+            <div class="controls no-print">
+                <button class="btn-secondary" onclick="window.print()">Print Result</button>
+                <button class="btn-success" onclick="showSolutions()">See Complete Solutions</button>
+            </div>
+            <div id="review-container" style="text-align: left; margin-top: 20px;"></div>
+        </div>
+
+    </div>
+
+    <script>
+        // --- QUESTION DATA ---
+        // Note: Use \\( math \\) for inline math. Use \\\\ to escape backslashes in JS.
+       const questionsData = [
+            // --- FROM IMAGE 1 (Questions 1 to 22) ---
+            {
+                id: 1,
+                q_bn: "\\(\\frac{1}{3}, \\frac{2}{3^2}, \\frac{4}{3^3}, \\frac{8}{3^4} ...\\) অনুক্রমটির সাধারণ পদ কোনটি?",
+                q_en: "What is the general term of the sequence \\(\\frac{1}{3}, \\frac{2}{3^2}, \\frac{4}{3^3}, \\frac{8}{3^4} ...\\)?",
+                options_bn: ["\\(\\frac{n+1}{3^n}\\)", "\\(\\frac{2^n}{3^n}\\)", "\\(\\frac{2^{n-1}}{3^n}\\)", "\\(\\frac{2^n-1}{3^n}\\)"],
+                options_en: ["\\(\\frac{n+1}{3^n}\\)", "\\(\\frac{2^n}{3^n}\\)", "\\(\\frac{2^{n-1}}{3^n}\\)", "\\(\\frac{2^n-1}{3^n}\\)"],
+                correct: 2,
+                sol_bn: "ব্যাখ্যা: লবগুলোর ধারা 1, 2, 4, 8... এটি একটি গুণোত্তর ধারা যার সাধারণ পদ \\(2^{n-1}\\)। হরগুলোর ধারা 3, 3^2, 3^3... যার সাধারণ পদ \\(3^n\\)। অতএব সাধারণ পদ \\(U_n = \\frac{2^{n-1}}{3^n}\\)।",
+                sol_en: "Solution: The numerators form a geometric series 1, 2, 4... with general term \\(2^{n-1}\\). Denominators are 3, 3^2, 3^3... with general term \\(3^n\\). Hence, \\(U_n = \\frac{2^{n-1}}{3^n}\\)."
+            },
+            {
+                id: 2,
+                q_bn: "\\(1, \\sqrt{3}, \\sqrt{5}, \\sqrt{7}, ...\\) অনুক্রমের সাধারণ পদ কোনটি?",
+                q_en: "What is the general term of the sequence \\(1, \\sqrt{3}, \\sqrt{5}, \\sqrt{7}, ...\\)?",
+                options_bn: ["\\(\\sqrt{2n+1}\\)", "\\(\\sqrt{2n-1}\\)", "\\(\\sqrt{n+1}\\)", "\\(\\sqrt{n^2-1}\\)"],
+                options_en: ["\\(\\sqrt{2n+1}\\)", "\\(\\sqrt{2n-1}\\)", "\\(\\sqrt{n+1}\\)", "\\(\\sqrt{n^2-1}\\)"],
+                correct: 1,
+                sol_bn: "ব্যাখ্যা: রুটের ভেতরের সংখ্যাগুলো 1, 3, 5, 7... যা একটি সমান্তর ধারা। এর n-তম পদ = \\(1 + (n-1)2 = 2n - 1\\)। সুতরাং অনুক্রমটির সাধারণ পদ \\(\\sqrt{2n-1}\\)।",
+                sol_en: "Solution: The numbers inside the root are 1, 3, 5, 7... which is an arithmetic progression. Its nth term = \\(1 + (n-1)2 = 2n - 1\\). So, the term is \\(\\sqrt{2n-1}\\)."
+            },
+            {
+                id: 3,
+                q_bn: "\\(1, \\frac{4}{3}, \\frac{9}{5}, \\frac{16}{7} ...\\) অনুক্রমটির ২০-তম পদ কোনটি?",
+                q_en: "What is the 20th term of the sequence \\(1, \\frac{4}{3}, \\frac{9}{5}, \\frac{16}{7} ...\\)?",
+                options_bn: ["\\(\\frac{20}{41}\\)", "\\(\\frac{20}{39}\\)", "\\(\\frac{40}{41}\\)", "\\(\\frac{400}{39}\\)"],
+                options_en: ["\\(\\frac{20}{41}\\)", "\\(\\frac{20}{39}\\)", "\\(\\frac{40}{41}\\)", "\\(\\frac{400}{39}\\)"],
+                correct: 3,
+                sol_bn: "ব্যাখ্যা: অনুক্রমটির সাধারণ পদ \\(U_n = \\frac{n^2}{2n-1}\\)। সুতরাং ২০-তম পদ = \\(\\frac{20^2}{2(20)-1} = \\frac{400}{39}\\)।",
+                sol_en: "Solution: The general term is \\(U_n = \\frac{n^2}{2n-1}\\). So the 20th term = \\(\\frac{20^2}{2(20)-1} = \\frac{400}{39}\\)."
+            },
+            {
+                id: 4,
+                q_bn: "\\(\\frac{1}{2}, \\frac{1}{5}, \\frac{1}{10}, \\frac{1}{17} ...\\) অনুক্রমটির ৬ষ্ঠ পদ কত?",
+                q_en: "What is the 6th term of the sequence \\(\\frac{1}{2}, \\frac{1}{5}, \\frac{1}{10}, \\frac{1}{17} ...\\)?",
+                options_bn: ["\\(\\frac{1}{36}\\)", "\\(\\frac{1}{37}\\)", "\\(\\frac{1}{50}\\)", "\\(\\frac{1}{65}\\)"],
+                options_en: ["\\(\\frac{1}{36}\\)", "\\(\\frac{1}{37}\\)", "\\(\\frac{1}{50}\\)", "\\(\\frac{1}{65}\\)"],
+                correct: 1,
+                sol_bn: "ব্যাখ্যা: অনুক্রমটির সাধারণ পদ \\(\\frac{1}{n^2+1}\\)। ৬ষ্ঠ পদ = \\(\\frac{1}{6^2+1} = \\frac{1}{37}\\)।",
+                sol_en: "Solution: General term is \\(\\frac{1}{n^2+1}\\). 6th term = \\(\\frac{1}{6^2+1} = \\frac{1}{37}\\)."
+            },
+            {
+                id: 5,
+                q_bn: "একটি অনুক্রমের n-তম পদ \\(U_n = \\frac{2 - (-1)^n}{2}\\)। অনুক্রমটির ৭-তম পদ কত?",
+                q_en: "The nth term of a sequence is \\(U_n = \\frac{2 - (-1)^n}{2}\\). What is the 7th term?",
+                options_bn: ["-2", "0", "2", "\\(\\frac{3}{2}\\)"],
+                options_en: ["-2", "0", "2", "\\(\\frac{3}{2}\\)"],
+                correct: 3,
+                sol_bn: "ব্যাখ্যা: \\(n=7\\) বসালে, \\(U_7 = \\frac{2 - (-1)^7}{2} = \\frac{2 - (-1)}{2} = \\frac{3}{2}\\)।",
+                sol_en: "Solution: Putting \\(n=7\\), \\(U_7 = \\frac{2 - (-1)^7}{2} = \\frac{2 + 1}{2} = \\frac{3}{2}\\)."
+            },
+            {
+                id: 6,
+                q_bn: "কোনো অনুক্রমের n-তম পদ \\(4n - 5\\) এবং \\(n \\in \\mathbb{N}\\) হলে ১৫-তম পদ নিচের কোনটি?",
+                q_en: "If the nth term of a sequence is \\(4n - 5\\) and \\(n \\in \\mathbb{N}\\), which of the following is the 15th term?",
+                options_bn: ["55", "60", "65", "75"],
+                options_en: ["55", "60", "65", "75"],
+                correct: 0,
+                sol_bn: "ব্যাখ্যা: \\(n=15\\) বসালে, \\(4(15) - 5 = 60 - 5 = 55\\)।",
+                sol_en: "Solution: Putting \\(n=15\\), \\(4(15) - 5 = 60 - 5 = 55\\)."
+            },
+            {
+                id: 7,
+                q_bn: "\\(U_n = \\frac{1 - (-1)^n}{2}\\) অনুক্রমটির ১ম ২০টি পদের সমষ্টি কত?",
+                q_en: "What is the sum of the first 20 terms of the sequence \\(U_n = \\frac{1 - (-1)^n}{2}\\)?",
+                options_bn: ["0", "1", "10", "20"],
+                options_en: ["0", "1", "10", "20"],
+                correct: 2,
+                sol_bn: "ব্যাখ্যা: পদগুলো হলো 1, 0, 1, 0 ...। ২০টি পদের মধ্যে ১০টি '1' এবং ১০টি '0' আছে। তাই সমষ্টি = \\(10 \\times 1 = 10\\)।",
+                sol_en: "Solution: The terms are 1, 0, 1, 0 ... In 20 terms, there are ten '1's and ten '0's. Sum = \\(10 \\times 1 = 10\\)."
+            },
+            {
+                id: 8,
+                q_bn: "কোনো অনুক্রমের n-তম পদ \\(5n - 2\\) হলে ধারাটির ৫ম ও ৬ষ্ঠ পদের গুণফল কত?",
+                q_en: "If the nth term is \\(5n - 2\\), what is the product of the 5th and 6th terms?",
+                options_bn: ["924", "644", "23", "28"],
+                options_en: ["924", "644", "23", "28"],
+                correct: 1,
+                sol_bn: "ব্যাখ্যা: ৫ম পদ = \\(5(5)-2 = 23\\)। ৬ষ্ঠ পদ = \\(5(6)-2 = 28\\)। গুণফল = \\(23 \\times 28 = 644\\)।",
+                sol_en: "Solution: 5th term = \\(25-2=23\\). 6th term = \\(30-2=28\\). Product = \\(23 \\times 28 = 644\\)."
+            },
+            {
+                id: 9,
+                q_bn: "\\(7 + 5 + 3 + ...\\) ধারাটির n-তম পদ কোনটি?",
+                q_en: "What is the nth term of the series \\(7 + 5 + 3 + ...\\)?",
+                options_bn: ["\\(9 - 2n\\)", "\\(2n - 9\\)", "\\(5 + 2n\\)", "\\(5 - 2n\\)"],
+                options_en: ["\\(9 - 2n\\)", "\\(2n - 9\\)", "\\(5 + 2n\\)", "\\(5 - 2n\\)"],
+                correct: 0,
+                sol_bn: "ব্যাখ্যা: এটি সমান্তর ধারা। \\(a=7, d=-2\\)। n-তম পদ = \\(a + (n-1)d = 7 + (n-1)(-2) = 9 - 2n\\)।",
+                sol_en: "Solution: Arithmetic series. \\(a=7, d=-2\\). nth term = \\(7 + (n-1)(-2) = 9 - 2n\\)."
+            },
+            {
+                id: 10,
+                q_bn: "\\(\\frac{4}{5} - \\frac{2}{5} + \\frac{1}{5} - ...\\) অসীম গুণোত্তর ধারার সাধারণ অনুপাত কত?",
+                q_en: "What is the common ratio of the infinite geometric series \\(\\frac{4}{5} - \\frac{2}{5} + \\frac{1}{5} - ...\\)?",
+                options_bn: ["\\(\\frac{1}{2}\\)", "\\(-\\frac{1}{2}\\)", "2", "-2"],
+                options_en: ["\\(\\frac{1}{2}\\)", "\\(-\\frac{1}{2}\\)", "2", "-2"],
+                correct: 1,
+                sol_bn: "ব্যাখ্যা: সাধারণ অনুপাত \\(r = \\frac{-2/5}{4/5} = -\\frac{1}{2}\\)।",
+                sol_en: "Solution: Common ratio \\(r = \\frac{-2/5}{4/5} = -\\frac{1}{2}\\)."
+            },
+            {
+                id: 11,
+                q_bn: "\\(1 + \\frac{1}{3} + \\frac{1}{9} + ...\\) ধারাটির অসীমতক সমষ্টি কত?",
+                q_en: "What is the sum to infinity of the series \\(1 + \\frac{1}{3} + \\frac{1}{9} + ...\\)?",
+                options_bn: ["\\(\\frac{3}{2}\\)", "\\(\\frac{2}{3}\\)", "3", "অসীম"],
+                options_en: ["\\(\\frac{3}{2}\\)", "\\(\\frac{2}{3}\\)", "3", "Infinity"],
+                correct: 0,
+                sol_bn: "ব্যাখ্যা: \\(a=1, r=1/3\\)। \\(S_\\infty = \\frac{1}{1 - 1/3} = \\frac{3}{2}\\)।",
+                sol_en: "Solution: \\(a=1, r=1/3\\). \\(S_\\infty = \\frac{1}{1 - 1/3} = \\frac{3}{2}\\)."
+            },
+            {
+                id: 12,
+                q_bn: "নিচের কোন ধারাটির অসীমতক সমষ্টি আছে?",
+                q_en: "Which of the following series has a sum to infinity?",
+                options_bn: ["\\(1 + 2 + 4 + 8 + ...\\)", "\\(1 - 1 + 1 - 1 + ...\\)", "\\(\\frac{1}{2} + \\frac{1}{4} + \\frac{1}{8} + ...\\)", "\\(1 + 3 + 9 + 27 + ...\\)"],
+                options_en: ["\\(1 + 2 + 4 + 8 + ...\\)", "\\(1 - 1 + 1 - 1 + ...\\)", "\\(\\frac{1}{2} + \\frac{1}{4} + \\frac{1}{8} + ...\\)", "\\(1 + 3 + 9 + 27 + ...\\)"],
+                correct: 2,
+                sol_bn: "ব্যাখ্যা: অসীমতক সমষ্টি থাকে যদি \\(|r| < 1\\) হয়। গ নং অপশনে \\(r = 1/2 < 1\\)।",
+                sol_en: "Solution: A sum to infinity exists if \\(|r| < 1\\). In option C, \\(r = 1/2 < 1\\)."
+            },
+            {
+                id: 13,
+                q_bn: "\\(\\sqrt{3} + 1 + \\frac{1}{\\sqrt{3}} + ...\\) ধারার অসীমতক সমষ্টি কত?",
+                q_en: "What is the sum to infinity of the series \\(\\sqrt{3} + 1 + \\frac{1}{\\sqrt{3}} + ...\\)?",
+                options_bn: ["\\(\\frac{3}{\\sqrt{3}-1}\\)", "\\(\\frac{3\\sqrt{3}}{\\sqrt{3}-1}\\)", "\\(\\frac{\\sqrt{3}+1}{2}\\)", "\\(\\frac{3+\\sqrt{3}}{2}\\)"],
+                options_en: ["\\(\\frac{3}{\\sqrt{3}-1}\\)", "\\(\\frac{3\\sqrt{3}}{\\sqrt{3}-1}\\)", "\\(\\frac{\\sqrt{3}+1}{2}\\)", "\\(\\frac{3+\\sqrt{3}}{2}\\)"],
+                correct: 3,
+                sol_bn: "ব্যাখ্যা: \\(a = \\sqrt{3}, r = 1/\\sqrt{3}\\)। \\(S = \\frac{\\sqrt{3}}{1 - 1/\\sqrt{3}} = \\frac{3}{\\sqrt{3}-1} = \\frac{3(\\sqrt{3}+1)}{2}\\)।",
+                sol_en: "Solution: \\(a = \\sqrt{3}, r = 1/\\sqrt{3}\\). \\(S = \\frac{3}{\\sqrt{3}-1} = \\frac{3(\\sqrt{3}+1)}{2}\\)."
+            },
+            {
+                id: 14,
+                q_bn: "একটি গুণোত্তর ধারার ১ম পদ 3 এবং সাধারণ অনুপাত \\(\\frac{1}{3}\\) হলে, অসীমতক সমষ্টি কত?",
+                q_en: "If the 1st term of a geometric series is 3 and common ratio is \\(\\frac{1}{3}\\), what is the sum to infinity?",
+                options_bn: ["\\(\\frac{9}{2}\\)", "3", "\\(\\frac{2}{9}\\)", "6"],
+                options_en: ["\\(\\frac{9}{2}\\)", "3", "\\(\\frac{2}{9}\\)", "6"],
+                correct: 0,
+                sol_bn: "ব্যাখ্যা: \\(S_\\infty = \\frac{a}{1-r} = \\frac{3}{1 - 1/3} = \\frac{3}{2/3} = \\frac{9}{2}\\)।",
+                sol_en: "Solution: \\(S_\\infty = \\frac{a}{1-r} = \\frac{3}{1 - 1/3} = \\frac{3}{2/3} = \\frac{9}{2}\\)."
+            },
+            {
+                id: 15,
+                q_bn: "\\(1 - \\frac{2}{7} + \\frac{4}{49} - \\frac{8}{343} + ...\\) ধারাটির অসীমতক সমষ্টি কত?",
+                q_en: "What is the sum to infinity of the series \\(1 - \\frac{2}{7} + \\frac{4}{49} - \\frac{8}{343} + ...\\)?",
+                options_bn: ["\\(\\frac{7}{9}\\)", "\\(\\frac{5}{7}\\)", "\\(\\frac{9}{7}\\)", "\\(\\frac{7}{5}\\)"],
+                options_en: ["\\(\\frac{7}{9}\\)", "\\(\\frac{5}{7}\\)", "\\(\\frac{9}{7}\\)", "\\(\\frac{7}{5}\\)"],
+                correct: 0,
+                sol_bn: "ব্যাখ্যা: \\(a = 1, r = -\\frac{2}{7}\\)। \\(S_\\infty = \\frac{1}{1 - (-2/7)} = \\frac{1}{9/7} = \\frac{7}{9}\\)।",
+                sol_en: "Solution: \\(a = 1, r = -\\frac{2}{7}\\). \\(S_\\infty = \\frac{1}{1 - (-2/7)} = \\frac{7}{9}\\)."
+            },
+            {
+                id: 16,
+                q_bn: "\\(\\frac{1}{3} + \\frac{1}{3^2} + \\frac{1}{3^3} + ...\\) ধারাটির অসীমতক সমষ্টি কত?",
+                q_en: "What is the sum to infinity of \\(\\frac{1}{3} + \\frac{1}{3^2} + \\frac{1}{3^3} + ...\\)?",
+                options_bn: ["1", "\\(\\frac{1}{2}\\)", "\\(\\frac{1}{3}\\)", "\\(\\frac{2}{3}\\)"],
+                options_en: ["1", "\\(\\frac{1}{2}\\)", "\\(\\frac{1}{3}\\)", "\\(\\frac{2}{3}\\)"],
+                correct: 1,
+                sol_bn: "ব্যাখ্যা: \\(a = 1/3, r = 1/3\\)। \\(S_\\infty = \\frac{1/3}{1 - 1/3} = \\frac{1/3}{2/3} = \\frac{1}{2}\\)।",
+                sol_en: "Solution: \\(a = 1/3, r = 1/3\\). \\(S_\\infty = \\frac{1/3}{1 - 1/3} = \\frac{1}{2}\\)."
+            },
+            {
+                id: 17,
+                q_bn: "কোনো গুণোত্তর ধারার সাধারণ অনুপাত \\(r\\) হলে, অসীমতক সমষ্টি থাকার শর্ত কোনটি?",
+                q_en: "What is the condition for an infinite geometric series to have a sum?",
+                options_bn: ["\\(r > 1\\)", "\\(r < -1\\)", "\\(|r| < 1\\)", "\\(|r| > 1\\)"],
+                options_en: ["\\(r > 1\\)", "\\(r < -1\\)", "\\(|r| < 1\\)", "\\(|r| > 1\\)"],
+                correct: 2,
+                sol_bn: "ব্যাখ্যা: অসীম গুণোত্তর ধারার সমষ্টি নির্ণয় করা যায় কেবল যদি \\(|r| < 1\\) বা \\(-1 < r < 1\\) হয়।",
+                sol_en: "Solution: An infinite geometric series converges only if \\(|r| < 1\\) i.e., \\(-1 < r < 1\\)."
+            },
+            {
+                id: 18,
+                q_bn: "একটি ধারার n-তম পদ \\(U_n = \\frac{1}{n(n+1)}\\)। ধারাটির ৩য় পদ কত?",
+                q_en: "The nth term of a series is \\(U_n = \\frac{1}{n(n+1)}\\). What is the 3rd term?",
+                options_bn: ["\\(\\frac{1}{2}\\)", "\\(\\frac{1}{6}\\)", "\\(\\frac{1}{12}\\)", "\\(\\frac{1}{20}\\)"],
+                options_en: ["\\(\\frac{1}{2}\\)", "\\(\\frac{1}{6}\\)", "\\(\\frac{1}{12}\\)", "\\(\\frac{1}{20}\\)"],
+                correct: 2,
+                sol_bn: "ব্যাখ্যা: \\(n=3\\) বসালে, \\(U_3 = \\frac{1}{3(3+1)} = \\frac{1}{12}\\)।",
+                sol_en: "Solution: Putting \\(n=3\\), \\(U_3 = \\frac{1}{3(4)} = \\frac{1}{12}\\)."
+            },
+            {
+                id: 19,
+                q_bn: "একটি ধারার n-তম পদ \\(U_n = (-1)^{n-1} \\frac{n}{n+1}\\)। ধারাটির ৪র্থ পদ কত?",
+                q_en: "The nth term of a series is \\(U_n = (-1)^{n-1} \\frac{n}{n+1}\\). What is the 4th term?",
+                options_bn: ["\\(\\frac{4}{5}\\)", "\\(-\\frac{4}{5}\\)", "\\(\\frac{3}{4}\\)", "\\(-\\frac{3}{4}\\)"],
+                options_en: ["\\(\\frac{4}{5}\\)", "\\(-\\frac{4}{5}\\)", "\\(\\frac{3}{4}\\)", "\\(-\\frac{3}{4}\\)"],
+                correct: 1,
+                sol_bn: "ব্যাখ্যা: \\(n=4\\) বসালে, \\(U_4 = (-1)^{4-1} \\frac{4}{4+1} = -1 \\times \\frac{4}{5} = -\\frac{4}{5}\\)।",
+                sol_en: "Solution: Putting \\(n=4\\), \\(U_4 = (-1)^3 \\frac{4}{5} = -\\frac{4}{5}\\)."
+            },
+            {
+                id: 20,
+                q_bn: "ধারা \\(x + x^2 + x^3 + ...\\) এর অসীমতক সমষ্টি থাকবে যদি-",
+                q_en: "The series \\(x + x^2 + x^3 + ...\\) will have a sum to infinity if-",
+                options_bn: ["\\(x > 1\\)", "\\(x < -1\\)", "\\(-1 < x < 1\\)", "\\(|x| > 1\\)"],
+                options_en: ["\\(x > 1\\)", "\\(x < -1\\)", "\\(-1 < x < 1\\)", "\\(|x| > 1\\)"],
+                correct: 2,
+                sol_bn: "ব্যাখ্যা: সাধারণ অনুপাত \\(r = x\\)। শর্তমতে, \\(|r| < 1 \\Rightarrow -1 < x < 1\\)।",
+                sol_en: "Solution: Common ratio \\(r = x\\). Condition is \\(|r| < 1 \\Rightarrow -1 < x < 1\\)."
+            },
+            {
+                id: 21,
+                q_bn: "কোনো গুণোত্তর ধারার ১ম পদ 5 এবং অসীমতক সমষ্টি 10 হলে সাধারণ অনুপাত কত?",
+                q_en: "If the first term of a geometric series is 5 and sum to infinity is 10, what is the common ratio?",
+                options_bn: ["\\(\\frac{1}{2}\\)", "\\(2\\)", "\\(-\\frac{1}{2}\\)", "\\(-2\\)"],
+                options_en: ["\\(\\frac{1}{2}\\)", "\\(2\\)", "\\(-\\frac{1}{2}\\)", "\\(-2\\)"],
+                correct: 0,
+                sol_bn: "ব্যাখ্যা: \\(S = \\frac{a}{1-r} \\Rightarrow 10 = \\frac{5}{1-r} \\Rightarrow 1-r = \\frac{1}{2} \\Rightarrow r = \\frac{1}{2}\\)।",
+                sol_en: "Solution: \\(S = \\frac{a}{1-r} \\Rightarrow 10 = \\frac{5}{1-r} \\Rightarrow 1-r = \\frac{1}{2} \\Rightarrow r = \\frac{1}{2}\\)."
+            },
+            {
+                id: 22,
+                q_bn: "১ম পদ 2 এবং সাধারণ অনুপাত \\(-1\\) হলে, ধারার প্রথম 50টি পদের সমষ্টি কত?",
+                q_en: "If the 1st term is 2 and common ratio is \\(-1\\), what is the sum of the first 50 terms?",
+                options_bn: ["0", "2", "50", "100"],
+                options_en: ["0", "2", "50", "100"],
+                correct: 0,
+                sol_bn: "ব্যাখ্যা: ধারাটি হবে \\(2 - 2 + 2 - 2 ...\\)। জোড় সংখ্যক পদের সমষ্টি সবসময় 0 হয়।",
+                sol_en: "Solution: The series is \\(2 - 2 + 2 - 2 ...\\) Sum of an even number of terms is 0."
+            },
+
+            // --- FROM IMAGE 2 (Questions 23 to 40) ---
+            {
+                id: 23,
+                q_bn: "\\(\\frac{1}{2} + (-\\frac{1}{4}) + \\frac{1}{8} + (-\\frac{1}{16}) + ...\\) ধারাটির অসীমতক সমষ্টি কত?",
+                q_en: "What is the sum to infinity of the series \\(\\frac{1}{2} + (-\\frac{1}{4}) + \\frac{1}{8} + (-\\frac{1}{16}) + ...\\)?",
+                options_bn: ["1", "\\(\\frac{1}{2}\\)", "\\(\\frac{1}{3}\\)", "\\(\\frac{2}{3}\\)"],
+                options_en: ["1", "\\(\\frac{1}{2}\\)", "\\(\\frac{1}{3}\\)", "\\(\\frac{2}{3}\\)"],
+                correct: 2,
+                sol_bn: "ব্যাখ্যা: এখানে \\(a = \\frac{1}{2}\\) এবং \\(r = -\\frac{1}{2}\\)। অসীমতক সমষ্টি \\(S_\\infty = \\frac{1/2}{1 - (-1/2)} = \\frac{1}{3}\\)।",
+                sol_en: "Solution: First term \\(a = 1/2\\), ratio \\(r = -1/2\\). Sum to infinity \\(S_\\infty = \\frac{1/2}{1 - (-1/2)} = 1/3\\)."
+            },
+            {
+                id: 24,
+                q_bn: "\\(16 - 4 + 1 - \\frac{1}{4} + ...\\) গুণোত্তর ধারাটির অসীমতক সমষ্টি কত?",
+                q_en: "What is the sum to infinity of the geometric series \\(16 - 4 + 1 - \\frac{1}{4} + ...\\)?",
+                options_bn: ["12", "\\(\\frac{64}{5}\\)", "20", "\\(\\frac{64}{3}\\)"],
+                options_en: ["12", "\\(\\frac{64}{5}\\)", "20", "\\(\\frac{64}{3}\\)"],
+                correct: 1,
+                sol_bn: "ব্যাখ্যা: \\(a = 16, r = -\\frac{1}{4}\\)। সমষ্টি \\(S_\\infty = \\frac{a}{1-r} = \\frac{16}{1 - (-1/4)} = \\frac{16}{5/4} = \\frac{64}{5}\\)।",
+                sol_en: "Solution: \\(a = 16, r = -1/4\\). Sum \\(S_\\infty = \\frac{a}{1-r} = \\frac{16}{1 - (-1/4)} = \\frac{64}{5}\\)."
+            },
+            {
+                id: 25,
+                q_bn: "\\(5 - 1 + \\frac{1}{5} - \\frac{1}{25} + ...\\) ধারাটির অসীমতক সমষ্টি কত?",
+                q_en: "What is the sum to infinity of the series \\(5 - 1 + \\frac{1}{5} - \\frac{1}{25} + ...\\)?",
+                options_bn: ["\\(\\frac{25}{6}\\)", "\\(\\frac{1}{4}\\)", "\\(-\\frac{25}{6}\\)", "\\(\\frac{1}{6}\\)"],
+                options_en: ["\\(\\frac{25}{6}\\)", "\\(\\frac{1}{4}\\)", "\\(-\\frac{25}{6}\\)", "\\(\\frac{1}{6}\\)"],
+                correct: 0,
+                sol_bn: "ব্যাখ্যা: \\(a = 5, r = -\\frac{1}{5}\\)। সমষ্টি \\(S_\\infty = \\frac{5}{1 - (-1/5)} = \\frac{5}{6/5} = \\frac{25}{6}\\)।",
+                sol_en: "Solution: \\(a = 5, r = -1/5\\). Sum \\(S_\\infty = \\frac{5}{1 - (-1/5)} = \\frac{25}{6}\\)."
+            },
+            {
+                id: 26,
+                q_bn: "\\(\\frac{1}{5} - \\frac{2}{5^2} + \\frac{4}{5^3} - \\frac{8}{5^4} + ...\\) ধারাটির অসীমতক সমষ্টি কত?",
+                q_en: "What is the sum to infinity of the series \\(\\frac{1}{5} - \\frac{2}{5^2} + \\frac{4}{5^3} - \\frac{8}{5^4} + ...\\)?",
+                options_bn: ["\\(\\frac{1}{3}\\)", "\\(\\frac{1}{7}\\)", "\\(\\frac{2}{7}\\)", "\\(\\frac{3}{7}\\)"],
+                options_en: ["\\(\\frac{1}{3}\\)", "\\(\\frac{1}{7}\\)", "\\(\\frac{2}{7}\\)", "\\(\\frac{3}{7}\\)"],
+                correct: 1,
+                sol_bn: "ব্যাখ্যা: \\(a = \\frac{1}{5}, r = -\\frac{2}{5}\\)। \\(S_\\infty = \\frac{1/5}{1 - (-2/5)} = \\frac{1/5}{7/5} = \\frac{1}{7}\\)।",
+                sol_en: "Solution: \\(a = 1/5, r = -2/5\\). \\(S_\\infty = \\frac{1/5}{1 - (-2/5)} = 1/7\\)."
+            },
+            {
+                id: 27,
+                q_bn: "কোনো অসীম গুণোত্তর ধারার সাধারণ অনুপাত \\(\\frac{1}{2}\\) এবং অসীমতক সমষ্টি \\(\\frac{2}{3}\\) হলে প্রথম পদ কত?",
+                q_en: "If common ratio is \\(\\frac{1}{2}\\) and sum to infinity is \\(\\frac{2}{3}\\), what is the first term?",
+                options_bn: ["\\(\\frac{1}{3}\\)", "\\(\\frac{4}{3}\\)", "1", "3"],
+                options_en: ["\\(\\frac{1}{3}\\)", "\\(\\frac{4}{3}\\)", "1", "3"],
+                correct: 0,
+                sol_bn: "ব্যাখ্যা: \\(S_\\infty = \\frac{a}{1-r} \\Rightarrow \\frac{2}{3} = \\frac{a}{1 - 1/2} \\Rightarrow a = \\frac{2}{3} \\times \\frac{1}{2} = \\frac{1}{3}\\)।",
+                sol_en: "Solution: \\(S_\\infty = \\frac{a}{1-r} \\Rightarrow \\frac{2}{3} = \\frac{a}{1 - 1/2} \\Rightarrow a = 1/3\\)."
+            },
+            {
+                id: 28,
+                q_bn: "একটি গুণোত্তর ধারার ১ম পদ 1 এবং অসীমতক সমষ্টি \\(\\frac{2\\sqrt{3}}{2\\sqrt{3}-1}\\) হলে সাধারণ অনুপাত কত?",
+                q_en: "1st term is 1 and sum to infinity is \\(\\frac{2\\sqrt{3}}{2\\sqrt{3}-1}\\). What is the common ratio?",
+                options_bn: ["\\(\\frac{1}{2\\sqrt{3}}\\)", "\\(\\frac{1}{\\sqrt{3}}\\)", "\\(\\sqrt{3}\\)", "\\(2\\sqrt{3}\\)"],
+                options_en: ["\\(\\frac{1}{2\\sqrt{3}}\\)", "\\(\\frac{1}{\\sqrt{3}}\\)", "\\(\\sqrt{3}\\)", "\\(2\\sqrt{3}\\)"],
+                correct: 0,
+                sol_bn: "ব্যাখ্যা: \\(S = \\frac{1}{1-r} = \\frac{2\\sqrt{3}}{2\\sqrt{3}-1} \\Rightarrow 1-r = 1 - \\frac{1}{2\\sqrt{3}} \\Rightarrow r = \\frac{1}{2\\sqrt{3}}\\)।",
+                sol_en: "Solution: \\(S = \\frac{1}{1-r} = \\frac{2\\sqrt{3}}{2\\sqrt{3}-1} \\Rightarrow 1-r = 1 - \\frac{1}{2\\sqrt{3}} \\Rightarrow r = \\frac{1}{2\\sqrt{3}}\\)."
+            },
+            {
+                id: 29,
+                q_bn: "একটি গুণোত্তর ধারার ১ম পদ \\(\\frac{1}{4}\\) এবং অসীমতক সমষ্টি \\(\\frac{2}{3}\\) হলে সাধারণ অনুপাত কত?",
+                q_en: "First term is \\(\\frac{1}{4}\\) and sum to infinity is \\(\\frac{2}{3}\\). What is the common ratio?",
+                options_bn: ["\\(\\frac{3}{8}\\)", "\\(\\frac{5}{8}\\)", "\\(\\frac{1}{2}\\)", "\\(\\frac{3}{4}\\)"],
+                options_en: ["\\(\\frac{3}{8}\\)", "\\(\\frac{5}{8}\\)", "\\(\\frac{1}{2}\\)", "\\(\\frac{3}{4}\\)"],
+                correct: 1,
+                sol_bn: "ব্যাখ্যা: \\(\\frac{2}{3} = \\frac{1/4}{1-r} \\Rightarrow 1-r = \\frac{3}{8} \\Rightarrow r = \\frac{5}{8}\\)।",
+                sol_en: "Solution: \\(\\frac{2}{3} = \\frac{1/4}{1-r} \\Rightarrow 1-r = 3/8 \\Rightarrow r = 5/8\\)."
+            },
+            {
+                id: 30,
+                q_bn: "কোনো ধারার সাধারণ অনুপাত \\(\\frac{1}{2x+3}\\) এবং অসীমতক সমষ্টি \\(\\frac{1}{2(x+1)}\\) হলে ১ম পদ কত?",
+                q_en: "Common ratio is \\(\\frac{1}{2x+3}\\) and sum is \\(\\frac{1}{2(x+1)}\\). What is the 1st term?",
+                options_bn: ["\\(\\frac{1}{2x+3}\\)", "\\(\\frac{1}{2x-1}\\)", "\\(\\frac{1}{(2x+3)(x+1)}\\)", "\\(\\frac{x}{x+1}\\)"],
+                options_en: ["\\(\\frac{1}{2x+3}\\)", "\\(\\frac{1}{2x-1}\\)", "\\(\\frac{1}{(2x+3)(x+1)}\\)", "\\(\\frac{x}{x+1}\\)"],
+                correct: 0,
+                sol_bn: "ব্যাখ্যা: \\(a = S(1-r) = \\frac{1}{2(x+1)} (1 - \\frac{1}{2x+3}) = \\frac{2x+2}{2(x+1)(2x+3)} = \\frac{1}{2x+3}\\)।",
+                sol_en: "Solution: \\(a = S(1-r) = \\frac{1}{2(x+1)} (1 - \\frac{1}{2x+3}) = \\frac{1}{2x+3}\\)."
+            },
+            {
+                id: 31,
+                q_bn: "\\(-7 + 7 - 7 + 7 - ...\\) ধারাটির প্রথম \\((2n+1)\\) সংখ্যক পদের যোগফল কত?",
+                q_en: "What is the sum of the first \\((2n+1)\\) terms of \\(-7 + 7 - 7 + 7 - ...\\)?",
+                options_bn: ["7", "0", "-7", "1"],
+                options_en: ["7", "0", "-7", "1"],
+                correct: 2,
+                sol_bn: "ব্যাখ্যা: \\((2n+1)\\) হলো বিজোড় সংখ্যা। ধারাটির বিজোড় সংখ্যক পদের যোগফল সবসময় -7 হয়।",
+                sol_en: "Solution: \\((2n+1)\\) represents an odd number. The sum of an odd number of terms here is -7."
+            },
+            {
+                id: 32,
+                q_bn: "\\(\\frac{1}{2x+1} + \\frac{1}{(2x+1)^2} + ...\\) ধারাটিতে x এর ওপর কী শর্ত আরোপ করলে অসীমতক সমষ্টি থাকবে?",
+                q_en: "What condition must be applied to x for \\(\\frac{1}{2x+1} + \\frac{1}{(2x+1)^2} + ...\\) to have an infinite sum?",
+                options_bn: ["\\(x < 0 \\text{ অথবা } x < -1\\)", "\\(x > 0 \\text{ অথবা } x < -1\\)", "\\(x > 0 \\text{ অথবা } x > -1\\)", "\\(x < 0 \\text{ অথবা } x > 1\\)"],
+                options_en: ["\\(x < 0 \\text{ or } x < -1\\)", "\\(x > 0 \\text{ or } x < -1\\)", "\\(x > 0 \\text{ or } x > -1\\)", "\\(x < 0 \\text{ or } x > 1\\)"],
+                correct: 1,
+                sol_bn: "ব্যাখ্যা: \\(|\\frac{1}{2x+1}| < 1 \\Rightarrow |2x+1| > 1\\)। অর্থাৎ \\(2x+1 > 1 \\Rightarrow x > 0\\) অথবা \\(2x+1 < -1 \\Rightarrow x < -1\\)।",
+                sol_en: "Solution: \\(|1/(2x+1)| < 1 \\Rightarrow |2x+1| > 1\\). So \\(2x+1 > 1 \\Rightarrow x > 0\\) or \\(2x+1 < -1 \\Rightarrow x < -1\\)."
+            },
+            {
+                id: 33,
+                q_bn: "\\(-1 < \\frac{1}{x+1} < 1\\) হলে x এর ক্ষেত্রে কোনটি সঠিক?",
+                q_en: "If \\(-1 < \\frac{1}{x+1} < 1\\), which condition is true for x?",
+                options_bn: ["\\(x > 0 \\text{ অথবা } x < -2\\)", "\\(x > -2 \\text{ অথবা } x > 0\\)", "\\(x < 0 \\text{ অথবা } x > 2\\)", "\\(x < -2 \\text{ অথবা } x > -1\\)"],
+                options_en: ["\\(x > 0 \\text{ or } x < -2\\)", "\\(x > -2 \\text{ or } x > 0\\)", "\\(x < 0 \\text{ or } x > 2\\)", "\\(x < -2 \\text{ or } x > -1\\)"],
+                correct: 0,
+                sol_bn: "ব্যাখ্যা: \\(|x+1| > 1\\)। সুতরাং \\(x+1 > 1 \\Rightarrow x > 0\\) অথবা \\(x+1 < -1 \\Rightarrow x < -2\\)।",
+                sol_en: "Solution: \\(|x+1| > 1\\). So \\(x+1 > 1 \\Rightarrow x > 0\\) or \\(x+1 < -1 \\Rightarrow x < -2\\)."
+            },
+            {
+                id: 34,
+                q_bn: "\\(1 + r + r^2 + ... + r^{n-1} = ?\\)",
+                q_en: "What is \\(1 + r + r^2 + ... + r^{n-1} = ?\\)",
+                options_bn: ["\\(\\frac{1-r^n}{1-r}\\)", "\\(\\frac{r^n-1}{r-1}\\)", "ক ও খ উভয়ই সঠিক", "কোনোটিই নয়"],
+                options_en: ["\\(\\frac{1-r^n}{1-r}\\)", "\\(\\frac{r^n-1}{r-1}\\)", "Both A & B are correct", "None of these"],
+                correct: 2,
+                sol_bn: "ব্যাখ্যা: গুণোত্তর ধারার n পদের সমষ্টির সূত্র অনুযায়ী \\(r<1\\) হলে (ক) এবং \\(r>1\\) হলে (খ) প্রযোজ্য, তাই উভয়ই গাণিতিকভাবে সমান।",
+                sol_en: "Solution: Formula for sum of n terms. Form A is used for \\(r<1\\), form B for \\(r>1\\). Both are algebraically identical."
+            },
+            {
+                id: 35,
+                q_bn: "নিচের কোনটি \\(0.1\\dot{4}\\) এর মূলদীয় ভগ্নাংশ?",
+                q_en: "Which of the following is the rational fraction of \\(0.1\\dot{4}\\)?",
+                options_bn: ["\\(\\frac{7}{45}\\)", "\\(\\frac{13}{90}\\)", "\\(\\frac{14}{99}\\)", "\\(\\frac{13}{99}\\)"],
+                options_en: ["\\(\\frac{7}{45}\\)", "\\(\\frac{13}{90}\\)", "\\(\\frac{14}{99}\\)", "\\(\\frac{13}{99}\\)"],
+                correct: 1,
+                sol_bn: "ব্যাখ্যা: নিয়ম অনুযায়ী, \\(0.1\\dot{4} = \\frac{14 - 1}{90} = \\frac{13}{90}\\)।",
+                sol_en: "Solution: Rule for recurring decimals: \\(0.1\\dot{4} = \\frac{14 - 1}{90} = \\frac{13}{90}\\)."
+            },
+            {
+                id: 36,
+                q_bn: "\\(5.\\dot{7}8\\dot{3}\\) এর সাধারণ ভগ্নাংশে প্রকাশ কোনটি?",
+                q_en: "What is the common fraction for \\(5.\\dot{7}8\\dot{3}\\)?",
+                options_bn: ["\\(\\frac{5783}{1000}\\)", "\\(\\frac{5783}{999}\\)", "\\(\\frac{5726}{990}\\)", "\\(\\frac{5778}{999}\\)"],
+                options_en: ["\\(\\frac{5783}{1000}\\)", "\\(\\frac{5783}{999}\\)", "\\(\\frac{5726}{990}\\)", "\\(\\frac{5778}{999}\\)"],
+                correct: 3,
+                sol_bn: "ব্যাখ্যা: \\(5.\\dot{7}8\\dot{3} = \\frac{5783 - 5}{999} = \\frac{5778}{999}\\)। (পৌনঃপুনিক ৩টি অঙ্কের ওপর আছে)।",
+                sol_en: "Solution: The recurring part has 3 digits. Fraction = \\(\\frac{5783 - 5}{999} = \\frac{5778}{999}\\)."
+            },
+            {
+                id: 37,
+                q_bn: "নিচের কোনটি \\(1.\\dot{2}\\) এর মূলদীয় ভগ্নাংশ?",
+                q_en: "Which is the rational fraction of \\(1.\\dot{2}\\)?",
+                options_bn: ["\\(\\frac{11}{9}\\)", "\\(\\frac{4}{3}\\)", "\\(\\frac{11}{10}\\)", "\\(\\frac{1}{9}\\)"],
+                options_en: ["\\(\\frac{11}{9}\\)", "\\(\\frac{4}{3}\\)", "\\(\\frac{11}{10}\\)", "\\(\\frac{1}{9}\\)"],
+                correct: 0,
+                sol_bn: "ব্যাখ্যা: \\(1.\\dot{2} = \\frac{12 - 1}{9} = \\frac{11}{9}\\)।",
+                sol_en: "Solution: \\(1.\\dot{2} = \\frac{12 - 1}{9} = \\frac{11}{9}\\)."
+            },
+            {
+                id: 38,
+                q_bn: "\\(1.1\\dot{4}\\dot{5} = ?\\)",
+                q_en: "\\(1.1\\dot{4}\\dot{5} = ?\\)",
+                options_bn: ["\\(\\frac{1134}{990}\\)", "\\(\\frac{1145}{990}\\)", "\\(\\frac{1134}{9990}\\)", "\\(\\frac{1134}{999}\\)"],
+                options_en: ["\\(\\frac{1134}{990}\\)", "\\(\\frac{1145}{990}\\)", "\\(\\frac{1134}{9990}\\)", "\\(\\frac{1134}{999}\\)"],
+                correct: 0,
+                sol_bn: "ব্যাখ্যা: \\(1.1\\dot{4}\\dot{5} = \\frac{1145 - 11}{990} = \\frac{1134}{990}\\)।",
+                sol_en: "Solution: \\(\\frac{1145 - 11}{990} = \\frac{1134}{990}\\)."
+            },
+            {
+                id: 39,
+                q_bn: "\\(2.\\dot{3}\\dot{5}\\) কে মূলদীয় ভগ্নাংশে প্রকাশ করলে কোনটি হবে?",
+                q_en: "Which is the rational fraction expression for \\(2.\\dot{3}\\dot{5}\\)?",
+                options_bn: ["\\(\\frac{233}{990}\\)", "\\(\\frac{235}{100}\\)", "\\(\\frac{233}{99}\\)", "\\(\\frac{235}{99}\\)"],
+                options_en: ["\\(\\frac{233}{990}\\)", "\\(\\frac{235}{100}\\)", "\\(\\frac{233}{99}\\)", "\\(\\frac{235}{99}\\)"],
+                correct: 2,
+                sol_bn: "ব্যাখ্যা: \\(2.\\dot{3}\\dot{5} = \\frac{235 - 2}{99} = \\frac{233}{99}\\)।",
+                sol_en: "Solution: \\(2.\\dot{3}\\dot{5} = \\frac{235 - 2}{99} = \\frac{233}{99}\\)."
+            },
+            {
+                id: 40,
+                q_bn: "\\(5.0\\dot{7}\\dot{5}\\) এর মূলদীয় ভগ্নাংশ নিচের কোনটি?",
+                q_en: "Which of the following is the rational fraction of \\(5.0\\dot{7}\\dot{5}\\)?",
+                options_bn: ["\\(\\frac{5075}{99}\\)", "\\(\\frac{1675}{33}\\)", "\\(\\frac{335}{66}\\)", "\\(\\frac{1015}{198}\\)"],
+                options_en: ["\\(\\frac{5075}{99}\\)", "\\(\\frac{1675}{33}\\)", "\\(\\frac{335}{66}\\)", "\\(\\frac{1015}{198}\\)"],
+                correct: 2,
+                sol_bn: "ব্যাখ্যা: \\(5.0\\dot{7}\\dot{5} = \\frac{5075 - 50}{990} = \\frac{5025}{990} = \\frac{335}{66}\\)।",
+                sol_en: "Solution: \\(\\frac{5075 - 50}{990} = \\frac{5025}{990}\\), dividing numerator and denominator by 15 gives \\(\\frac{335}{66}\\)."
+            }
+        ];
+
+        let currentLang = 'en';
+        let timerInterval;
+        let totalTime = 40 * 60; // 40 minutes
+        const TOTAL_MARKS = 40;
+
+        function initExam(lang) {
+            currentLang = lang;
+            document.getElementById('setup-screen').style.display = 'none';
+            document.getElementById('exam-screen').style.display = 'block';
+
+            // Auto-fill placeholders based on language
+            document.getElementById('studentName').placeholder = lang === 'bn' ? "ছাত্র/ছাত্রীর নাম: ... ..." : "Student Name: ... ...";
+            document.getElementById('schoolName').placeholder = lang === 'bn' ? "বিদ্যালয়/কলেজ: ... ..." : "School/College: ... ...";
+            document.getElementById('examDate').placeholder = lang === 'bn' ? "তারিখ: ... ..." : "Date: ... ...";
+
+            renderQuestions();
+        }
+
+        function renderQuestions() {
+            const container = document.getElementById('questions-container');
+            container.innerHTML = '';
+
+            questionsData.forEach((q, index) => {
+                const questionText = currentLang === 'bn' ? q.q_bn : q.q_en;
+                const options = currentLang === 'bn' ? q.options_bn : q.options_en;
+
+                let optionsHTML = '';
+                const labels = currentLang === 'bn' ? ['ক', 'খ', 'গ', 'ঘ'] : ['A', 'B', 'C', 'D'];
+
+                options.forEach((opt, optIdx) => {
+                    optionsHTML += `
+                    <label>
+                        <input type="radio" name="q${q.id}" value="${optIdx}">
+                        <strong>${labels[optIdx]}.</strong> <span>${opt}</span>
+                    </label>
+                `;
+                });
+
+                const card = `
+                <div class="question-card" id="card-q${q.id}">
+                    <p><strong>${q.id}.</strong> <span>${questionText}</span></p>
+                    <div class="options-grid">
+                        ${optionsHTML}
+                    </div>
+                    <div class="solution-box" id="sol-q${q.id}"></div>
+                </div>
+            `;
+                container.innerHTML += card;
+            });
+
+            if (window.MathJax) { MathJax.typesetPromise(); }
+        }
+
+        function startExam() {
+            const name = document.getElementById('studentName').value;
+            if (!name) {
+                alert(currentLang === 'bn' ? "পরীক্ষা শুরু করার আগে আপনার নাম লিখুন।" : "Please enter your name before starting.");
+                return;
+            }
+
+            document.getElementById('studentName').disabled = true;
+            document.getElementById('schoolName').disabled = true;
+            document.getElementById('examDate').disabled = true;
+            document.getElementById('startControls').style.display = 'none';
+            document.getElementById('examForm').style.display = 'block';
+
+            startTimer();
+        }
+
+        function startTimer() {
+            const display = document.getElementById('timeDisplay');
+            timerInterval = setInterval(() => {
+                totalTime--;
+                let m = Math.floor(totalTime / 60);
+                let s = totalTime % 60;
+                display.textContent = (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
+
+                if (totalTime <= 0) {
+                    clearInterval(timerInterval);
+                    autoSubmit();
+                }
+            }, 1000);
+        }
+
+        function autoSubmit() {
+            alert(currentLang === 'bn' ? "সময় শেষ! খাতা জমা দেওয়া হচ্ছে।" : "Time is up! Submitting answer sheet.");
+            submitExam();
+        }
+
+        function submitExam() {
+            clearInterval(timerInterval);
+            let score = 0, right = 0, wrong = 0, unattempted = 0;
+
+            questionsData.forEach(q => {
+                const selected = document.querySelector(`input[name="q${q.id}"]:checked`);
+                const card = document.getElementById(`card-q${q.id}`);
+
+                if (selected) {
+                    if (parseInt(selected.value) === q.correct) {
+                        score++; right++;
+                        card.style.borderLeft = "5px solid #28a745";
+                    } else {
+                        wrong++;
+                        card.style.borderLeft = "5px solid #dc3545";
+                    }
+                } else {
+                    unattempted++;
+                    card.style.borderLeft = "5px solid #ffc107";
+                }
+            });
+
+            document.getElementById('timerBar').style.display = 'none';
+            document.getElementById('exam-screen').style.display = 'none';
+            document.getElementById('result-screen').style.display = 'block';
+
+            const allRadios = document.querySelectorAll('input[type="radio"]');
+            allRadios.forEach(radio => radio.disabled = true);
+
+            const scoreText = currentLang === 'bn' ? `প্রাপ্ত নম্বর: ${score} / ${TOTAL_MARKS}` : `Score: ${score} / ${TOTAL_MARKS}`;
+            const feedbackText = currentLang === 'bn' ?
+                `সঠিক: ${right} | ভুল: ${wrong} | উত্তর দেওয়া হয়নি: ${unattempted}` :
+                `Right: ${right} | Wrong: ${wrong} | Unattempted: ${unattempted}`;
+
+            document.getElementById('scoreDisplay').textContent = scoreText;
+            document.getElementById('feedbackDisplay').textContent = feedbackText;
+
+            document.getElementById('review-container').appendChild(document.getElementById('questions-container'));
+        }
+
+        function showSolutions() {
+            questionsData.forEach(q => {
+                const solBox = document.getElementById(`sol-q${q.id}`);
+                const solutionText = currentLang === 'bn' ? q.sol_bn : q.sol_en;
+                const labels = currentLang === 'bn' ? ['ক', 'খ', 'গ', 'ঘ'] : ['A', 'B', 'C', 'D'];
+                const ansPrefix = currentLang === 'bn' ? `<strong>সঠিক উত্তর: ${labels[q.correct]}</strong><br>` : `<strong>Correct Answer: ${labels[q.correct]}</strong><br>`;
+
+                solBox.innerHTML = ansPrefix + solutionText;
+                solBox.style.display = 'block';
+            });
+            if (window.MathJax) { MathJax.typesetPromise(); }
+        }
+    </script>
+
+</body>
+
+</html>
