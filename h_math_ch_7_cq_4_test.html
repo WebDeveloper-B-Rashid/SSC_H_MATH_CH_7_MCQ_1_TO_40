@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSC Preparation Test 2027 - Higher Mathematics</title>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        /* Base Styles for Screen */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e5e7eb;
+            color: #111827;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Controls / Buttons */
+        .controls {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            margin: 0 8px;
+            cursor: pointer;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+            transition: opacity 0.2s, transform 0.1s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn-bn {
+            background-color: #10b981;
+        }
+
+        /* Emerald */
+        .btn-en {
+            background-color: #3b82f6;
+        }
+
+        /* Blue */
+        .btn-print {
+            background-color: #4b5563;
+        }
+
+        /* Gray */
+
+        /* A4 Page Layout */
+        .page-container {
+            background-color: #ffffff;
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            padding: 25mm 20mm;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            box-sizing: border-box;
+            border-radius: 4px;
+        }
+
+        /* Formal Exam Header */
+        .exam-title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .exam-meta {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 2px solid #000;
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .meta-left,
+        .meta-right {
+            line-height: 1.5;
+        }
+
+        .meta-right {
+            text-align: right;
+        }
+
+        .instructions {
+            text-align: center;
+            font-weight: normal;
+            margin-bottom: 30px;
+            font-size: 15px;
+        }
+
+        /* Questions Layout */
+        .question-block {
+            margin-bottom: 30px;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .question-stem {
+            margin-bottom: 12px;
+        }
+
+        .sub-questions {
+            margin-left: 24px;
+        }
+
+        .sub-question-item {
+            margin-bottom: 8px;
+            display: flex;
+        }
+
+        .sq-label {
+            margin-right: 8px;
+            white-space: nowrap;
+        }
+
+        @media print {
+            body {
+                background-color: #ffffff;
+                padding: 0;
+            }
+
+            .controls {
+                display: none !important;
+            }
+
+            .page-container {
+                width: 100%;
+                min-height: auto;
+                margin: 0;
+                padding: 0;
+                box-shadow: none;
+                border: none;
+            }
+
+            @page {
+                size: A4;
+                margin: 20mm;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="controls no-print">
+        <button class="btn btn-bn" onclick="switchLanguage('bn')">Bangla Version</button>
+        <button class="btn btn-en" onclick="switchLanguage('en')">English Version</button>
+        <button class="btn btn-print" onclick="window.print()">Print</button>
+    </div>
+
+    <div class="page-container">
+
+        <!-- ================= BANGLA VERSION ================= -->
+        <div id="version-bn">
+            <div class="exam-title">SSC Preparation Test - 2027
+               <h5 style="color: blue;">MD. Rashid [Assistant Professor]<br> Contact: 01711008786</h5>
+            </div>
+            <div class="exam-meta">
+                <div class="meta-left">
+                    Subject: Higher Mathematics<br>
+                    Time: 30 Minutes
+                </div>
+                <div class="meta-right">
+                    Subject Code: 126<br>
+                    Full Marks: 20
+                </div>
+            </div>
+            <div class="instructions">[যেকোনো ২টি প্রশ্নের উত্তর দাও। প্রতিটি প্রশ্নের মান ১০ (২+৪+৪)]</div>
+
+            <!-- Question 1 -->
+            <div class="question-block">
+                <div class="question-stem">
+                    ১. \(\frac{1}{2x+5} + \frac{1}{(2x+5)^2} + \frac{1}{(2x+5)^3} + \dots\)
+                </div>
+                <div class="sub-questions">
+                    <div class="sub-question-item">
+                        <span class="sq-label">(ক)</span>
+                        <span>\(x = 1\) হলে ধারাটি নির্ণয় কর এবং প্রাপ্ত ধারাটির সাধারণ অনুপাত নির্ণয় কর।</span>
+                    </div>
+                    <div class="sub-question-item">
+                        <span class="sq-label">(খ)</span>
+                        <span>\(x = -1\) হলে ধারাটির ১৫তম পদ এবং ৩০টি পদের সমষ্টি নির্ণয় কর।</span>
+                    </div>
+                    <div class="sub-question-item">
+                        <span class="sq-label">(গ)</span>
+                        <span>\(x\) এর উপর কী শর্ত আরোপ করলে ধারাটির অসীমতক সমষ্টি থাকবে এবং সেই সমষ্টি নির্ণয়
+                            কর।</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question-block">
+                <div class="question-stem">
+                    ২. (i) \(\frac{1}{2x-7} + \frac{1}{(2x-7)^2} + \frac{1}{(2x-7)^3} + \dots\)<br>
+                    &nbsp;&nbsp;&nbsp;(ii) \(8 + 88 + 888 + \dots\)
+                </div>
+                <div class="sub-questions">
+                    <div class="sub-question-item">
+                        <span class="sq-label">(ক)</span>
+                        <span>\(\frac{1}{2} + \frac{1}{2} + \frac{3}{8} + \frac{1}{4} + \dots\) ধারাটির \(n\) তম পদ
+                            নির্ণয় কর।</span>
+                    </div>
+                    <div class="sub-question-item">
+                        <span class="sq-label">(খ)</span>
+                        <span>(i) নং ধারাটির অসীমতক সমষ্টির জন্য \(x\) এর উপর শর্ত নির্ণয় কর।</span>
+                    </div>
+                    <div class="sub-question-item">
+                        <span class="sq-label">(গ)</span>
+                        <span>(ii) নং ধারাটির ১ম ১৫টি পদের সমষ্টি নির্ণয় কর।</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question-block">
+                <div class="question-stem">
+                    ৩. একটি গুণোত্তর ধারার \(n\) তম পদ, \(U_n = \frac{(-1)^{n+1}}{(2x)^n}\), \(n \in \mathbb{N}\)
+                </div>
+                <div class="sub-questions">
+                    <div class="sub-question-item">
+                        <span class="sq-label">(ক)</span>
+                        <span>ধারাটি নির্ণয় কর।</span>
+                    </div>
+                    <div class="sub-question-item">
+                        <span class="sq-label">(খ)</span>
+                        <span>\(x = 1\) হলে ধারাটির ৬ষ্ঠ পদ এবং ১ম ১০ পদের সমষ্টি নির্ণয় কর।</span>
+                    </div>
+                    <div class="sub-question-item">
+                        <span class="sq-label">(গ)</span>
+                        <span>'ক' এ প্রাপ্ত ধারাটিতে \(x\) এর উপর কী শর্ত আরোপ করলে ধারাটির অসীমতক সমষ্টি থাকবে এবং সেই
+                            সমষ্টি নির্ণয় কর।</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="question-block">
+                <div class="question-stem">
+                    ৪. একটি অনন্ত গুণোত্তর ধারার প্রথম পদ তৃতীয় পদ অপেক্ষা \(\frac{63}{100}\) বেশি এবং তৃতীয় পদ পঞ্চম
+                    পদ অপেক্ষা \(\frac{252}{2500}\) বেশি।
+                </div>
+                <div class="sub-questions">
+                    <div class="sub-question-item">
+                        <span class="sq-label">(ক)</span>
+                        <span>প্রথম পদ \(a\) এবং সাধারণ অনুপাত \(r\) ধরে উদ্দীপকের আলোকে সমীকরণ গঠন কর।</span>
+                    </div>
+                    <div class="sub-question-item">
+                        <span class="sq-label">(খ)</span>
+                        <span>ধারাটির অসীমতক সমষ্টি নির্ণয় কর।</span>
+                    </div>
+                    <div class="sub-question-item">
+                        <span class="sq-label">(গ)</span>
+                        <span>ধারাটির প্রথম \(n\) সংখ্যক পদের আংশিক সমষ্টি \(\frac{15465}{12500}\) হলে, \(n\) এর মান
+                            নির্ণয় কর।</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= ENGLISH VERSION ================= -->
+        <div id="version-en" style="display: none;">
+            <div class="exam-title">SSC Preparation Test - 2027
+                <h5 style="color: blue;">MD. Rashid [Assistant Professor]<br> Contact: 01711008786</h5>
+            </div>
+            <div class="exam-meta">
+                <div class="meta-left">
+                    Subject: Higher Mathematics<br>
+                    Time: 30 Minutes
+                </div>
+                <div class="meta-right">
+                    Subject Code: 126<br>
+                    Full Marks: 20
+                </div>
+            </div>
+            <div class="instructions">[Answer Any Two Questions. Each question carries 10 marks (2+4+4)]</div>
+
+            <!-- Question 1 -->
+            <div class="question-block">
+                <div class="question-stem">
+                    1. \(\frac{1}{2x+5} + \frac{1}{(2x+5)^2} + \frac{1}{(2x+5)^3} + \dots\)
+                </div>
+                <div class="sub-questions">
+                    <div class="sub-question-item">
+                        <span class="sq-label">(a)</span>
+                        <span>If \(x = 1\), determine the series and find the common ratio of the obtained
+                            series.</span>
+                    </div>
+                    <div class="sub-question-item">
+                        <span class="sq-label">(b)</span>
+                        <span>If \(x = -1\), find the 15th term and the sum of the first 30 terms of the series.</span>
+                    </div>
+                    <div class="sub-question-item">
+                        <span class="sq-label">(c)</span>
+                        <span>Under what condition on \(x\) will the series have a sum to infinity? Find that
+                            sum.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question-block">
+                <div class="question-stem">
+                    2. (i) \(\frac{1}{2x-7} + \frac{1}{(2x-7)^2} + \frac{1}{(2x-7)^3} + \dots\)<br>
+                    &nbsp;&nbsp;&nbsp;(ii) \(8 + 88 + 888 + \dots\)
+                </div>
+                <div class="sub-questions">
+                    <div class="sub-question-item">
+                        <span class="sq-label">(a)</span>
+                        <span>Find the \(n\)-th term of the series: \(\frac{1}{2} + \frac{1}{2} + \frac{3}{8} +
+                            \frac{1}{4} + \dots\)</span>
+                    </div>
+                    <div class="sub-question-item">
+                        <span class="sq-label">(b)</span>
+                        <span>Determine the condition on \(x\) for the series (i) to have an infinite sum.</span>
+                    </div>
+                    <div class="sub-question-item">
+                        <span class="sq-label">(c)</span>
+                        <span>Find the sum of the first 15 terms of the series (ii).</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question-block">
+                <div class="question-stem">
+                    3. The \(n\)-th term of a geometric series is \(U_n = \frac{(-1)^{n+1}}{(2x)^n}\), \(n \in
+                    \mathbb{N}\)
+                </div>
+                <div class="sub-questions">
+                    <div class="sub-question-item">
+                        <span class="sq-label">(a)</span>
+                        <span>Determine the series.</span>
+                    </div>
+                    <div class="sub-question-item">
+                        <span class="sq-label">(b)</span>
+                        <span>If \(x = 1\), find the 6th term and the sum of the first 10 terms of the series.</span>
+                    </div>
+                    <div class="sub-question-item">
+                        <span class="sq-label">(c)</span>
+                        <span>What condition must be applied to \(x\) in the series obtained in 'a' for it to have a sum
+                            to infinity? Find that sum.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="question-block">
+                <div class="question-stem">
+                    4. In an infinite geometric series, the first term is greater than the third term by
+                    \(\frac{63}{100}\), and the third term is greater than the fifth term by \(\frac{252}{2500}\).
+                </div>
+                <div class="sub-questions">
+                    <div class="sub-question-item">
+                        <span class="sq-label">(a)</span>
+                        <span>Forming equations based on the stimulus, let the first term be \(a\) and the common ratio
+                            be \(r\).</span>
+                    </div>
+                    <div class="sub-question-item">
+                        <span class="sq-label">(b)</span>
+                        <span>Determine the sum to infinity of the series.</span>
+                    </div>
+                    <div class="sub-question-item">
+                        <span class="sq-label">(c)</span>
+                        <span>If the partial sum of the first \(n\) terms of the series is \(\frac{15465}{12500}\), find
+                            the value of \(n\).</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function switchLanguage(lang) {
+            const bnVersion = document.getElementById('version-bn');
+            const enVersion = document.getElementById('version-en');
+
+            if (lang === 'bn') {
+                bnVersion.style.display = 'block';
+                enVersion.style.display = 'none';
+            } else if (lang === 'en') {
+                bnVersion.style.display = 'none';
+                enVersion.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+
+</html>
